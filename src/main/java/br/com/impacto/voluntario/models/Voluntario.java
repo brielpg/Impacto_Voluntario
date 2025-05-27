@@ -30,7 +30,7 @@ public class Voluntario {
     private Boolean ativo;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
-    private Long necessidadesConcluidas;
+    private Integer missoesConcluidas;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;

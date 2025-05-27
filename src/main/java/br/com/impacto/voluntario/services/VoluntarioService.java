@@ -32,7 +32,7 @@ public class VoluntarioService {
 
         voluntario.setAtivo(true);
         voluntario.setDataCadastro(LocalDate.now());
-        voluntario.setNecessidadesConcluidas(0L);
+        voluntario.setMissoesConcluidas(0);
 
         repository.save(voluntario);
 
