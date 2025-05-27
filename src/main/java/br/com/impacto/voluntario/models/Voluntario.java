@@ -31,6 +31,8 @@ public class Voluntario {
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
     private Long necessidadesConcluidas;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
     private List<HabilidadesEnum> habilidades;
     private String habilidadeOutro;
