@@ -17,4 +17,9 @@ public class TemplatesController {
     public String primeirosSocorros(){
         return "primeirosSocorros";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
