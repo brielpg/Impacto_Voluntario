@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VoluntarioRepository extends JpaRepository<Voluntario, Long> {
+    boolean existsByCpf(String cpf);
+
+    boolean existsByEmail(String email);
 }
