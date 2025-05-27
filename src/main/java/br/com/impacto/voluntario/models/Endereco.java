@@ -1,5 +1,6 @@
 package br.com.impacto.voluntario.models;
 
+import br.com.impacto.voluntario.dtos.DtoEndereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,15 @@ public class Endereco {
     private String cidade;
     private String uf;
     private String bairro;
-    private Long numero;
+    private Integer numero;
     private String complemento;
+
+    public Endereco(DtoEndereco dto) {
+        this.cep = dto.cep();
+        this.cidade = dto.cidade();
+        this.uf = dto.uf();
+        this.bairro = dto.bairro();
+        this.numero = dto.numero();
+        this.complemento = dto.complemento();
+    }
 }
