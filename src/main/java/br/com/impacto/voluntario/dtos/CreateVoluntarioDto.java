@@ -3,10 +3,7 @@ package br.com.impacto.voluntario.dtos;
 import br.com.impacto.voluntario.dtos.DtoEndereco;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,7 +33,7 @@ public record CreateVoluntarioDto(
         @Valid
         DtoEndereco endereco,
 
-        @NotBlank(message = "Habilidades sao obrigatórias")
+        @NotEmpty(message = "Habilidades sao obrigatórias")
         List<HabilidadesEnum> habilidades,
 
         String habilidadeOutro
