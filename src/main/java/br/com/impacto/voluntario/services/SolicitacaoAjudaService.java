@@ -2,6 +2,7 @@ package br.com.impacto.voluntario.services;
 
 import br.com.impacto.voluntario.dtos.CreateSolicitacaoAjudaDto;
 import br.com.impacto.voluntario.enums.AjudaRequeridaEnum;
+import br.com.impacto.voluntario.enums.StatusEnum;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.SolicitacaoAjuda;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class SolicitacaoAjudaService {
@@ -31,10 +33,16 @@ public class SolicitacaoAjudaService {
         solicitacao.setEndereco(endereco);
         solicitacao.setAtivo(true);
         solicitacao.setDataEnvio(LocalDate.now());
+        solicitacao.setStatus(StatusEnum.ANALISE);
 
         repository.save(solicitacao);
 
         return solicitacao;
+    }
+
+    @Transactional(readOnly = true)
+    public List<SolicitacaoAjuda> getAll() {
+        return repository.findAllByAtivo();
     }
 
     private SolicitacaoAjuda dtoToEntity(CreateSolicitacaoAjudaDto dto){
