@@ -1,5 +1,8 @@
 package br.com.impacto.voluntario.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum DesastreEnum {
     ENCHENTE("Enchente"),
     SECA("Seca"),
