@@ -42,6 +42,10 @@ public class Voluntario implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+    @ElementCollection(targetClass = HabilidadesEnum.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "voluntario_habilidades", joinColumns = @JoinColumn(name = "voluntario_id"))
+    @Column(name = "habilidade")
     private List<HabilidadesEnum> habilidades;
     private String habilidadeOutro;
 
