@@ -228,7 +228,10 @@
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.desastre.descricao}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.nomeSolicitante}"><span class="text-gray-500 text-xs" th:text="'(' + ${solicitacao.emailSolicitante} + ')'"></span></p>
+                        <p class="text-gray-900 whitespace-no-wrap">
+                            <span th:text="${solicitacao.nomeSolicitante}"></span>
+                            <span class="text-gray-500 text-xs" th:text="'(' + ${solicitacao.emailSolicitante} + ')'"></span>
+                        </p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.endereco.cidade} + '/' + ${solicitacao.endereco.uf}"></p>
@@ -246,13 +249,13 @@
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.dataAcontecimento}"></p>
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${@localeConfig.formatDate(solicitacao.dataAcontecimento, #locale)}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <button class="text-blue-600 hover:text-blue-900 mr-3">Detalhar</button>
                         <button class="text-green-600 hover:text-green-900 mr-3">Aprovar</button>
-                        <button class="text-red-400 hover:text-gray-900">Negar</button>
-                        <button class="text-red-600 hover:text-gray-900">Excluir</button>
+                        <button class="text-red-600 hover:text-gray-900 mr-3">Negar</button>
+                        <button class="text-red-800 hover:text-gray-900">Excluir</button>
                     </td>
                 </tr>
                 </tbody>
