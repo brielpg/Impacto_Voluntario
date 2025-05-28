@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Ajuda - Resgate Solidário</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+<div th:replace="~{fragments/header :: header}">
+    Impacto Voluntário Header
+</div>
+
+<div class="font-sans antialiased text-gray-800 flex items-center justify-center min-h-screen py-10">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl">
+        <h2 class="text-3xl font-bold text-center text-gray-950 mb-6">Solicitar Ajuda de Voluntários</h2>
+        <p class="text-center text-gray-600 mb-8">Se você ou sua comunidade foram afetados por um desastre natural e precisam de apoio, preencha o formulário abaixo. Nossos voluntários estão prontos para ajudar.</p>
+
+        <form th:action="@{/ajuda}" method="post">
+            <fieldset class="border border-gray-300 p-6 rounded-lg mb-8">
+                <legend class="text-xl font-semibold text-gray-800 mb-4 px-2 -ml-2">1. Seus Dados</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Seu Nome Completo</label>
+                        <input type="text" name="nomeSolicitante" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Seu nome" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Seu E-mail</label>
+                        <input type="email" name="emailSolicitante" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Telefone para Contato (com DDD)</label>
+                    <input type="tel" name="telefoneSolicitante" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(XX) XXXXX-XXXX" required>
+                </div>
+            </fieldset>
+
+            <fieldset class="border border-gray-300 p-6 rounded-lg mb-8">
+                <legend class="text-xl font-semibold text-gray-800 mb-4 px-2 -ml-2">2. Detalhes da Situação</legend>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Descreva o Problema e a Ajuda Necessária</label>
+                    <textarea name="descricao" rows="6" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Descreva o que aconteceu, o que está precisando (água, comida, medicamentos, resgate, abrigo, etc.) e o número de pessoas afetadas." required></textarea>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Desastre</label>
+                        <select name="desastre" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <option value="">Selecione</option>
+                            <option value="ENCHENTE">Enchente</option>
+                            <option value="SECA">Seca</option>
+                            <option value="DESLIZAMENTO">Deslizamento</option>
+                            <option value="TERREMOTO">Terremoto</option>
+                            <option value="INCENDIO">Incêndio Florestal/Urbano</option>
+                            <option value="VENDAVAL">Vendaval/Ciclone</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Data Aproximada do Acontecimento</label>
+                        <input type="date" name="dataAcontecimento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Número Estimado de Pessoas Afetadas</label>
+                        <input type="number" name="pessoasAfetadas" min="1" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 50" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Nível de Urgência</label>
+                        <select name="urgencia" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <option value="BAIXA">Baixa (Pode esperar alguns dias)</option>
+                            <option value="MEDIA">Média (Precisa em breve)</option>
+                            <option value="ALTA">Alta (Precisa nas próximas 24-48h)</option>
+                            <option value="ALTISSIMA">Altíssima (Vida em risco, precisa de ajuda imediata)</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border border-gray-300 p-6 rounded-lg mb-8">
+                <legend class="text-xl font-semibold text-gray-800 mb-4 px-2 -ml-2">3. Localização da Ajuda</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">CEP</label>
+                        <input type="text" name="endereco.cep" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00000-000" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Cidade</label>
+                        <input type="text" name="endereco.cidade" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: São Paulo" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">UF</label>
+                        <input type="text" name="endereco.uf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: SP, RJ" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Bairro</label>
+                        <input type="text" name="endereco.bairro" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Jardim Paulista" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Número</label>
+                        <input type="text" name="endereco.numero" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Complemento (opcional)</label>
+                        <input type="text" name="endereco.complemento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Complemento">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="border border-gray-300 p-6 rounded-lg mb-8">
+                <legend class="text-xl font-semibold text-gray-800 mb-4 px-2 -ml-2">4. Tipo de Ajuda Requerida</legend>
+                <p class="text-gray-700 text-sm font-bold mb-3">Marque as opções que se aplicam:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="RESGATE_PESSOAS" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Resgate de pessoas</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="AJUDA_MEDICA" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Ajuda médica/Primeiros Socorros</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="ALIMENTOS_AGUA" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Alimentos e água potável</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="ABRIGO_TEMPORARIO" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Abrigo temporário</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="ROUPAS_COBERTORES" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Roupas e cobertores</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="LIMPEZA_DESOBSTRUCAO" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Limpeza e desobstrução</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="RECONSTRUCAO_REPAROS" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Reconstrução/Reparos</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="APOIO_PSICOLOGICO" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Apoio psicológico</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="LOGISTICA_TRANSPORTE" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Logística/Transporte</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="AJUDA_ANIMAIS" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Ajuda a animais</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" name="ajudaRequerida" value="OUTROS" class="form-checkbox h-5 w-5 text-blue-600">
+                        <span class="ml-2 text-gray-700">Outros (especificar abaixo)</span>
+                    </label>
+                </div>
+                <input type="text" name="outros" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-3" placeholder="Especifique outros tipos de ajuda, se houver">
+            </fieldset>
+
+            <div class="mb-6">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" required>
+                    <span class="ml-2 text-gray-700 text-sm">Declaro que as informações fornecidas são verdadeiras e que a ajuda é realmente necessária.</span>
+                </label>
+            </div>
+
+            <div class="flex items-center justify-center">
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 w-full md:w-auto">Enviar Solicitação de Ajuda</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">
+    &copy; 2025 Impacto Voluntário
+</div>
+
+</body>
+</html>
