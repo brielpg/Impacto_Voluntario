@@ -24,6 +24,8 @@ public class Necessidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
     @Enumerated(EnumType.STRING)
     private DesastreEnum desastre;
