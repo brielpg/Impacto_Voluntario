@@ -54,6 +54,14 @@ public class VoluntarioService implements UserDetailsService {
         return voluntario;
     }
 
+    @Transactional(readOnly = true)
+    public Voluntario getByEmail(String email) {
+        var voluntario = repository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Voluntario not found with email: " + email));
+
+        return (Voluntario) voluntario;
+    }
+
     private Voluntario dtoToEntity(CreateVoluntarioDto dto){
         var voluntario = new Voluntario();
 

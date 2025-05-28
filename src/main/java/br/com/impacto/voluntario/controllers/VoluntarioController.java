@@ -11,12 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/voluntario")
 public class VoluntarioController {
 
     @Autowired
     private VoluntarioService service;
+
+    @GetMapping("/dashboard")
+    public String dashboard(Model model, Principal principal){
+        var voluntario = service.getByEmail(principal.getName());
+        model.addAttribute("voluntario", voluntario);
+        return "voluntario/dashboard";
+    }
 
     @GetMapping
     public String createPage(Model model){

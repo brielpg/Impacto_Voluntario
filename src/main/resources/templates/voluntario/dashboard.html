@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Voluntário</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="font-sans antialiased bg-gray-100 text-gray-800">
+
+<div th:replace="~{fragments/header :: header}">
+    Impacto Voluntário Header
+</div>
+
+<div class="container mx-auto p-6 mt-8">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6">Olá, <span th:text="${voluntario.nome}"></span>!</h1>
+    <p class="text-lg text-gray-600 mb-8">Bem-vindo(a) ao seu painel de controle. Aqui você pode encontrar e gerenciar oportunidades de ajuda.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">Oportunidades Ativas</h3>
+                <p class="text-blue-600 text-4xl font-bold">?</p>
+            </div>
+            <div class="text-blue-500 text-5xl">🚨</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">Missões Concluídas</h3>
+                <p class="text-green-600 text-4xl font-bold" th:text="${voluntario.missoesConcluidas}"></p>
+            </div>
+            <div class="text-green-500 text-5xl">✅</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-700">Vidas Impactadas</h3>
+                <p class="text-gray-950 text-4xl font-bold" th:text="${voluntario.vidasImpactadas}"></p>
+            </div>
+            <div class="text-red-500 text-5xl">❤️</div>
+        </div>
+    </div>
+
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Minhas Inscrições</h2>
+<!--    Um for loop em todas as inscricoes do usuario exibindo em divs-->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Ajuda Humanitária em [Cidade/Região]</h3>
+            <p class="text-gray-600 mb-3">Necessidade urgente de apoio para distribuição de alimentos e abrigo.</p>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Local:</span> [Endereço Aproximado]
+            </div>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Habilidades Requeridas:</span> Logística, Organização, Comunicação
+            </div>
+            <div class="text-gray-700 text-sm mb-4">
+                <span class="font-semibold">Urgência:</span> <span class="text-red-600 font-bold">ALTA</span>
+            </div>
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Apoio Médico em Campo</h3>
+            <p class="text-gray-600 mb-3">Profissionais de saúde para atendimento primário em área remota.</p>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Local:</span> [Endereço Aproximado]
+            </div>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Habilidades Requeridas:</span> Médico, Enfermeiro, Primeiros Socorros
+            </div>
+            <div class="text-gray-700 text-sm mb-4">
+                <span class="font-semibold">Urgência:</span> Moderada
+            </div>
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500 hover:shadow-lg transition duration-300">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Reconstrução de Infraestrutura</h3>
+            <p class="text-gray-600 mb-3">Auxílio na recuperação de estruturas danificadas por enchentes.</p>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Local:</span> [Endereço Aproximado]
+            </div>
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Habilidades Requeridas:</span> Engenheiro, Construção, Mão de Obra
+            </div>
+            <div class="text-gray-700 text-sm mb-4">
+                <span class="font-semibold">Urgência:</span> Média
+            </div>
+            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
+        </div>
+    </div>
+
+<!--    Um botao que leva para a tela de mais missoes/oportunidades -->
+    <div class="text-center mt-10">
+        <button class="bg-gray-300 text-gray-800 px-8 py-3 rounded-full hover:bg-gray-400 transition duration-300">Ver Todas as Oportunidades</button>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">
+    &copy; 2025 Impacto Voluntário
+</div>
+
+</body>
+</html>
