@@ -2,6 +2,7 @@ package br.com.impacto.voluntario.controllers;
 
 import br.com.impacto.voluntario.dtos.CreateVoluntarioDto;
 import br.com.impacto.voluntario.models.Voluntario;
+import br.com.impacto.voluntario.services.NecessidadeService;
 import br.com.impacto.voluntario.services.VoluntarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,15 @@ public class VoluntarioController {
     @Autowired
     private VoluntarioService service;
 
+    @Autowired
+    private NecessidadeService necessidadeService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal){
         var voluntario = service.getByEmail(principal.getName());
+        var oportunidades = necessidadeService.getAll().size();
         model.addAttribute("voluntario", voluntario);
+        model.addAttribute("oportunidades", oportunidades);
         return "voluntario/dashboard";
     }
 
