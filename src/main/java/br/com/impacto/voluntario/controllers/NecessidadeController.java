@@ -22,7 +22,7 @@ public class NecessidadeController {
     public String necessidadesPage(Model model){
         var necessidades = service.getAll();
         model.addAttribute("necessidades", necessidades);
-        return "areasAfetadas";
+        return "necessidades";
     }
 
     @PostMapping
