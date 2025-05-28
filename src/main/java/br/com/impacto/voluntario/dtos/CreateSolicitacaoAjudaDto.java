@@ -36,10 +36,10 @@ public record CreateSolicitacaoAjudaDto(
         @Valid
         DtoEndereco endereco,
 
-        @NotBlank(message = "Desastre é obrigatório")
+        @NotNull(message = "Desastre é obrigatório")
         DesastreEnum desastre,
 
-        @NotBlank(message = "Urgencia é obrigatório")
+        @NotNull(message = "Urgencia é obrigatório")
         UrgenciaEnum urgencia,
 
         @NotEmpty(message = "Ajuda Requerida é obrigatório")
