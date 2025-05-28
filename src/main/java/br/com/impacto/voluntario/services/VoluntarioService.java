@@ -4,6 +4,7 @@ import br.com.impacto.voluntario.dtos.CreateVoluntarioDto;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.Voluntario;
+import br.com.impacto.voluntario.repositories.EnderecoRepository;
 import br.com.impacto.voluntario.repositories.VoluntarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class VoluntarioService {
     @Autowired
     private VoluntarioRepository repository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     @Transactional
     public Voluntario create(CreateVoluntarioDto dto){
         if (repository.existsByCpf(dto.cpf())) throw new RuntimeException("Cpf already registered");
@@ -27,7 +31,7 @@ public class VoluntarioService {
         if (Period.between(dto.dataNascimento(), LocalDate.now()).getYears() < 18)
             throw new RuntimeException("Voluntario must be at least 18 years old");
 
-        var endereco = new Endereco(dto.endereco());
+        var endereco = enderecoRepository.save(new Endereco(dto.endereco()));
         var voluntario = dtoToEntity(dto, endereco);
 
         voluntario.setAtivo(true);
