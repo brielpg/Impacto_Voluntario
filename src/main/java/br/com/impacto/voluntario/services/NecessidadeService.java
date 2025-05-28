@@ -47,6 +47,7 @@ public class NecessidadeService {
         var necessidade = new Necessidade();
 
         necessidade.setTitulo(dto.titulo());
+        necessidade.setDescricao(dto.descricao());
         necessidade.setDesastre(dto.desastre());
         necessidade.setUrgencia(dto.urgencia());
         necessidade.setHabilidadesRequeridas(dto.habilidadesRequeridas());
