@@ -2,6 +2,7 @@ package br.com.impacto.voluntario.models;
 
 import br.com.impacto.voluntario.enums.AjudaRequeridaEnum;
 import br.com.impacto.voluntario.enums.DesastreEnum;
+import br.com.impacto.voluntario.enums.StatusEnum;
 import br.com.impacto.voluntario.enums.UrgenciaEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,8 @@ public class SolicitacaoAjuda {
     private DesastreEnum desastre;
     @Enumerated(EnumType.STRING)
     private UrgenciaEnum urgencia;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
     @ElementCollection(targetClass = AjudaRequeridaEnum.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "solicitacoes_ajudas", joinColumns = @JoinColumn(name = "solicitacao_id"))
