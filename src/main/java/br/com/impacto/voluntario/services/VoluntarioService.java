@@ -3,6 +3,9 @@ package br.com.impacto.voluntario.services;
 import br.com.impacto.voluntario.dtos.CreateVoluntarioDto;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
 import br.com.impacto.voluntario.enums.Roles;
+import br.com.impacto.voluntario.exceptions.ConflictException;
+import br.com.impacto.voluntario.exceptions.InvalidDateException;
+import br.com.impacto.voluntario.exceptions.ObjectNotFoundException;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.Voluntario;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
@@ -32,12 +35,11 @@ public class VoluntarioService implements UserDetailsService {
 
     @Transactional
     public Voluntario create(CreateVoluntarioDto dto){
-        if (repository.existsByCpf(dto.cpf())) throw new RuntimeException("Cpf already registered");
-        if (repository.existsByEmail(dto.email())) throw new RuntimeException("Email already registered");
-        if (dto.habilidades().isEmpty()) throw new RuntimeException("Habilidades cannot be empty");
-        if (dto.dataNascimento().isAfter(LocalDate.now())) throw new RuntimeException("Date cannot be higher than now");
+        if (repository.existsByCpf(dto.cpf())) throw new ConflictException("Cpf already registered");
+        if (repository.existsByEmail(dto.email())) throw new ConflictException("Email already registered");
+        if (dto.dataNascimento().isAfter(LocalDate.now())) throw new InvalidDateException();
         if (Period.between(dto.dataNascimento(), LocalDate.now()).getYears() < 18)
-            throw new RuntimeException("Voluntario must be at least 18 years old");
+            throw new InvalidDateException("Voluntario must be at least 18 years old");
 
         var endereco = enderecoRepository.save(new Endereco(dto.endereco()));
         var voluntario = dtoToEntity(dto);
@@ -57,7 +59,7 @@ public class VoluntarioService implements UserDetailsService {
     @Transactional(readOnly = true)
     public Voluntario getByEmail(String email) {
         var voluntario = repository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Voluntario not found with email: " + email));
+                .orElseThrow(() -> new ObjectNotFoundException("Voluntario with email \""+email+"\" not found"));
 
         return (Voluntario) voluntario;
     }
@@ -82,6 +84,6 @@ public class VoluntarioService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByEmail(username)
-                .orElseThrow(() -> new RuntimeException("Voluntario not found with email: " + username));
+                .orElseThrow(() -> new ObjectNotFoundException("Voluntario with email \""+username+"\" not found"));
     }
 }

@@ -3,6 +3,7 @@ package br.com.impacto.voluntario.services;
 import br.com.impacto.voluntario.dtos.CreateSolicitacaoAjudaDto;
 import br.com.impacto.voluntario.enums.AjudaRequeridaEnum;
 import br.com.impacto.voluntario.enums.StatusEnum;
+import br.com.impacto.voluntario.exceptions.InvalidDateException;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.SolicitacaoAjuda;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
@@ -25,7 +26,7 @@ public class SolicitacaoAjudaService {
 
     @Transactional
     public SolicitacaoAjuda create(CreateSolicitacaoAjudaDto dto){
-        if (dto.dataAcontecimento().isAfter(LocalDate.now())) throw new RuntimeException("Date cannot be higher than now");
+        if (dto.dataAcontecimento().isAfter(LocalDate.now())) throw new InvalidDateException();
 
         var endereco = enderecoRepository.save(new Endereco(dto.endereco()));
         var solicitacao = dtoToEntity(dto);
