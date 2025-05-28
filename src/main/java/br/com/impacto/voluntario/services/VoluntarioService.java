@@ -2,11 +2,16 @@ package br.com.impacto.voluntario.services;
 
 import br.com.impacto.voluntario.dtos.CreateVoluntarioDto;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
+import br.com.impacto.voluntario.enums.Roles;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.Voluntario;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
 import br.com.impacto.voluntario.repositories.VoluntarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,13 +19,16 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Service
-public class VoluntarioService {
+public class VoluntarioService implements UserDetailsService {
 
     @Autowired
     private VoluntarioRepository repository;
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional
     public Voluntario create(CreateVoluntarioDto dto){
@@ -37,6 +45,7 @@ public class VoluntarioService {
         voluntario.setAtivo(true);
         voluntario.setDataCadastro(LocalDate.now());
         voluntario.setMissoesConcluidas(0);
+        voluntario.setRole(Roles.USER);
 
         repository.save(voluntario);
 
@@ -50,7 +59,7 @@ public class VoluntarioService {
         voluntario.setEmail(dto.email());
         voluntario.setCpf(dto.cpf());
         voluntario.setTelefone(dto.telefone());
-        voluntario.setSenha(dto.senha());
+        voluntario.setSenha(passwordEncoder.encode(dto.senha()));
         voluntario.setDataNascimento(dto.dataNascimento());
         voluntario.setEndereco(endereco);
         voluntario.setHabilidades(dto.habilidades());
@@ -59,5 +68,11 @@ public class VoluntarioService {
             voluntario.setHabilidadeOutro(dto.habilidadeOutro());
 
         return voluntario;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByEmail(username)
+                .orElseThrow(() -> new RuntimeException("Voluntario not found with email: " + username));
     }
 }
