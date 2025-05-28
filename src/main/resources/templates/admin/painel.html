@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .tab-button.active {
+            @apply bg-blue-700 text-white;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-100 text-gray-800">
+
+<div th:replace="~{fragments/header :: header}">
+    Impacto Voluntário Header
+</div>
+
+<div class="container mx-auto p-6 mt-8">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Painel Administrativo</h1>
+    <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto">Gerencie as operações da plataforma, desde necessidades cadastradas até as solicitações de ajuda recebidas.</p>
+
+    <div class="flex border-b border-gray-300 mb-8">
+        <button id="tab-manage-needs" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200 active" onclick="showTab('manage-needs')">
+            Gerenciar Necessidades
+        </button>
+        <button id="tab-manage-requests" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200" onclick="showTab('manage-requests')">
+            Gerenciar Solicitações de Ajuda
+        </button>
+    </div>
+
+    <div id="content-manage-needs" class="tab-content">
+        <div class="bg-white p-8 rounded-lg shadow-xl mb-10">
+            <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center">Cadastrar Nova Necessidade</h2>
+            <form th:action="@{/necessidade}" method="post">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Título da Necessidade</label>
+                        <input type="text" name="titulo" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Ajuda Humanitária em X" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Desastre</label>
+                        <select name="desastre" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <option value="">Selecione o tipo de desastre</option>
+                            <option value="ENCHENTE">Enchente</option>
+                            <option value="SECA">Seca</option>
+                            <option value="DESLIZAMENTO">Deslizamento</option>
+                            <option value="TERREMOTO">Terremoto</option>
+                            <option value="INCENDIO">Incêndio</option>
+                            <option value="VENDAVAL">Vendaval</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">CEP</label>
+                        <input type="text" name="endereco.cep" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00000-000" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Cidade</label>
+                        <input type="text" name="endereco.cidade" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: São Paulo" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">UF</label>
+                        <input type="text" name="endereco.uf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: SP, RJ" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Bairro</label>
+                        <input type="text" name="endereco.bairro" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Jardim Paulista" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Número</label>
+                        <input type="text" name="endereco.numero" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Complemento (opcional)</label>
+                        <input type="text" name="endereco.complemento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Complemento">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Nível de Urgência</label>
+                        <select name="urgencia" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <option value="BAIXA">Baixa</option>
+                            <option value="MEDIA">Média</option>
+                            <option value="ALTA">Alta</option>
+                            <option value="ALTISSIMA">Altíssima</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Habilidades Requeridas</label>
+                    <div class="flex flex-wrap gap-3">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="MEDICO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Médico(a)</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="ENFERMEIRO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Enfermeiro(a)</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="ENGENHEIRO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Engenheiro(a)</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="RESGATE" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Resgate</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="COZINHA" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Cozinha/Alimentos</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="LOGISTICA" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Logística</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="PSICOLOGO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Psicólogo(a)</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="EDUCACAO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Educação</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="habilidadesRequeridas" value="OUTRO" class="form-checkbox h-5 w-5 text-blue-600">
+                            <span class="ml-2 text-gray-700">Outro (especificar)</span>
+                        </label>
+                    </div>
+                    <input type="text" name="habilidadeOutro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2" placeholder="Especifique outras habilidades">
+                </div>
+                <div class="flex items-center justify-center">
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300">Cadastrar Necessidade</button>
+                </div>
+            </form>
+        </div>
+
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Necessidades Cadastradas</h2>
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+            <table class="min-w-full leading-normal">
+                <thead>
+                <tr>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Título
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Local
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Tipo Desastre
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Urgência
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Ações
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="necessidade : ${necessidades}">
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${necessidade.titulo}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${necessidade.endereco.cidade} + '/' + ${necessidade.endereco.uf}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${necessidade.desastre.descricao}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${necessidade.status.descricao}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                    <span aria-hidden="true" class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                    <span class="relative" th:text="${necessidade.urgencia.descricao}"></span>
+                                </span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button class="text-green-600 hover:text-blue-900 mr-3">Finalizar</button>
+                        <button class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
+                        <button class="text-red-600 hover:text-red-900">Excluir</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="content-manage-requests" class="tab-content hidden">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Solicitações de Ajuda Recebidas</h2>
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+            <table class="min-w-full leading-normal">
+                <thead>
+                <tr>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Desastre
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Solicitante
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Local
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Urgência
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Status
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Data Solicitação
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Ações
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="solicitacao : ${solicitacoes}">
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.desastre.descricao}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.nomeSolicitante}"><span class="text-gray-500 text-xs" th:text="'(' + ${solicitacao.emailSolicitante} + ')'"></span></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.endereco.cidade} + '/' + ${solicitacao.endereco.uf}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                    <span aria-hidden="true" class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                    <span class="relative" th:text="${solicitacao.urgencia.descricao}"></span>
+                                </span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span class="relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight">
+                                    <span aria-hidden="true" class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
+                                    <span class="relative" th:text="${solicitacao.status.descricao}"></span>
+                                </span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.dataAcontecimento}"></p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <button class="text-blue-600 hover:text-blue-900 mr-3">Detalhar</button>
+                        <button class="text-green-600 hover:text-green-900 mr-3">Aprovar</button>
+                        <button class="text-red-400 hover:text-gray-900">Negar</button>
+                        <button class="text-red-600 hover:text-gray-900">Excluir</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}">
+    &copy; 2025 Impacto Voluntário
+</div>
+
+<script>
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.classList.remove('active', 'bg-blue-700', 'text-white');
+            button.classList.add('bg-gray-200', 'text-gray-700');
+        });
+
+        document.getElementById('content-' + tabId).classList.remove('hidden');
+
+        document.getElementById('tab-' + tabId).classList.add('active', 'bg-blue-700', 'text-white');
+        document.getElementById('tab-' + tabId).classList.remove('bg-gray-200', 'text-gray-700');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showTab('manage-needs');
+    });
+</script>
+
+</body>
+</html>

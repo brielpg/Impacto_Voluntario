@@ -8,6 +8,7 @@
             <a href="/ps" class="text-lg font-semibold hover:text-gray-300 hover:underline">Pronto Socorro</a>
             <a href="/ajuda" class="text-lg font-semibold hover:text-gray-300 hover:underline">Solicite Ajuda</a>
             <a sec:authorize="isAuthenticated()" href="/voluntario/dashboard" class="text-lg font-semibold hover:text-gray-300 hover:underline">Dashboard</a>
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" href="/admin/painel" class="text-lg font-semibold hover:text-gray-300 hover:underline">Painel Admin</a>
             <a sec:authorize="!isAuthenticated()" href="/login" class="text-lg font-semibold hover:text-gray-300 hover:underline">Login</a>
             <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
                 <button class="text-lg font-semibold hover:text-gray-300 hover:underline">Sair</button></form>
