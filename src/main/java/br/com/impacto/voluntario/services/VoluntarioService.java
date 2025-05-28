@@ -40,8 +40,9 @@ public class VoluntarioService implements UserDetailsService {
             throw new RuntimeException("Voluntario must be at least 18 years old");
 
         var endereco = enderecoRepository.save(new Endereco(dto.endereco()));
-        var voluntario = dtoToEntity(dto, endereco);
+        var voluntario = dtoToEntity(dto);
 
+        voluntario.setEndereco(endereco);
         voluntario.setAtivo(true);
         voluntario.setDataCadastro(LocalDate.now());
         voluntario.setMissoesConcluidas(0);
@@ -52,7 +53,7 @@ public class VoluntarioService implements UserDetailsService {
         return voluntario;
     }
 
-    private Voluntario dtoToEntity(CreateVoluntarioDto dto, Endereco endereco){
+    private Voluntario dtoToEntity(CreateVoluntarioDto dto){
         var voluntario = new Voluntario();
 
         voluntario.setNome(dto.nome());
@@ -61,7 +62,6 @@ public class VoluntarioService implements UserDetailsService {
         voluntario.setTelefone(dto.telefone());
         voluntario.setSenha(passwordEncoder.encode(dto.senha()));
         voluntario.setDataNascimento(dto.dataNascimento());
-        voluntario.setEndereco(endereco);
         voluntario.setHabilidades(dto.habilidades());
 
         if (dto.habilidades().contains(HabilidadesEnum.OUTRO))
