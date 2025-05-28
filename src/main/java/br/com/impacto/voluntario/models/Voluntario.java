@@ -37,6 +37,7 @@ public class Voluntario implements UserDetails {
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
     private Integer missoesConcluidas;
+    private Integer vidasImpactadas;
     @Enumerated(EnumType.STRING)
     private Roles role;
     @OneToOne(cascade = CascadeType.ALL)
