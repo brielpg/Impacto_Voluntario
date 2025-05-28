@@ -33,7 +33,9 @@ public class SolicitacaoAjuda {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+    @Enumerated(EnumType.STRING)
     private DesastreEnum desastre;
+    @Enumerated(EnumType.STRING)
     private UrgenciaEnum urgencia;
     @ElementCollection(targetClass = AjudaRequeridaEnum.class)
     @Enumerated(EnumType.STRING)
