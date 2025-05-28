@@ -13,7 +13,7 @@ public class TemplatesController {
         return "home";
     }
 
-    @GetMapping("/ps")
+    @GetMapping("/primeirosSocorros")
     public String primeirosSocorros(){
         return "primeirosSocorros";
     }

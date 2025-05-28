@@ -28,6 +28,6 @@ public class SolicitacaoAjudaController {
     public String createSolicitacao(@Valid CreateSolicitacaoAjudaDto dto, Model model){
         var solicitacao = service.create(dto);
         model.addAttribute("solicitacao", solicitacao);
-        return "redirect:home";
+        return "redirect:/primeirosSocorros";
     }
 }
