@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "voluntarios")
@@ -34,6 +35,10 @@ public class SolicitacaoAjuda {
     private Endereco endereco;
     private DesastreEnum desastre;
     private UrgenciaEnum urgencia;
-    private AjudaRequeridaEnum ajudaRequerida;
+    @ElementCollection(targetClass = AjudaRequeridaEnum.class)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "solicitacoes_ajudas", joinColumns = @JoinColumn(name = "solicitacao_id"))
+    @Column(name = "ajuda_requerida")
+    private List<AjudaRequeridaEnum> ajudaRequerida;
     private String outros;
 }
