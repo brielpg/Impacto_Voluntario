@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "voluntarios")
+@Table(name = "solicitacoes_ajudas")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -42,7 +42,7 @@ public class SolicitacaoAjuda {
     private StatusEnum status;
     @ElementCollection(targetClass = AjudaRequeridaEnum.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "solicitacoes_ajudas", joinColumns = @JoinColumn(name = "solicitacao_id"))
+    @CollectionTable(name = "solicitacoes_ajudas_ajuda_requerida", joinColumns = @JoinColumn(name = "solicitacao_id"))
     @Column(name = "ajuda_requerida")
     private List<AjudaRequeridaEnum> ajudaRequerida;
     private String outros;
