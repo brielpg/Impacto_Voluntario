@@ -24,6 +24,7 @@ public class Necessidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
+    private Integer pessoasAfetadas;
     private String descricao;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")

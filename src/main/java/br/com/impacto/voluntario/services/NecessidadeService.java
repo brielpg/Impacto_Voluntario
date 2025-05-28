@@ -48,6 +48,7 @@ public class NecessidadeService {
 
         necessidade.setTitulo(dto.titulo());
         necessidade.setDescricao(dto.descricao());
+        necessidade.setPessoasAfetadas(dto.pessoasAfetadas());
         necessidade.setDesastre(dto.desastre());
         necessidade.setUrgencia(dto.urgencia());
         necessidade.setHabilidadesRequeridas(dto.habilidadesRequeridas());

@@ -15,6 +15,8 @@ public record CreateNecessidadeDto(
         String titulo,
         @NotBlank(message = "Descricao é obrigatória")
         String descricao,
+        @NotNull(message = "Quantidade de pessoas afetadas é obrigatório")
+        Integer pessoasAfetadas,
         @NotNull(message = "Endereço é obrigatório")
         @Valid
         DtoEndereco endereco,
