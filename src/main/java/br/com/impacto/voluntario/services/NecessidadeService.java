@@ -3,6 +3,7 @@ package br.com.impacto.voluntario.services;
 import br.com.impacto.voluntario.dtos.CreateNecessidadeDto;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
 import br.com.impacto.voluntario.enums.StatusEnum;
+import br.com.impacto.voluntario.exceptions.ObjectNotFoundException;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.Necessidade;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
@@ -41,6 +42,21 @@ public class NecessidadeService {
     @Transactional(readOnly = true)
     public List<Necessidade> getAll() {
         return repository.findAllByAtivo();
+    }
+
+    @Transactional
+    public void excluir(Long id) {
+        var necessidade = this.findById(id);
+        necessidade.setAtivo(false);
+        repository.save(necessidade);
+    }
+
+    @Transactional
+    private Necessidade findById(Long id){
+        if (!repository.existsById(id))
+            throw new ObjectNotFoundException("Necessidade with id: "+id+" not found");
+
+        return repository.getReferenceById(id);
     }
 
     private Necessidade dtoToEntity(CreateNecessidadeDto dto){

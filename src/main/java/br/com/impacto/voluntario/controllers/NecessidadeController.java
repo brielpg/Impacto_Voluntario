@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,5 +32,11 @@ public class NecessidadeController {
         var necessidade =  service.create(dto);
         model.addAttribute("necessidade", necessidade);
         return "redirect:admin/painel";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirNecessidade(@PathVariable Long id){
+        service.excluir(id);
+        return "redirect:/admin/painel";
     }
 }

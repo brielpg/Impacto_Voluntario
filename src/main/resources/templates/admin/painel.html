@@ -200,8 +200,7 @@
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         <button class="text-green-600 hover:text-blue-900 mr-3">Finalizar</button>
-                        <button class="text-blue-600 hover:text-blue-900 mr-3">Editar</button>
-                        <button class="text-red-600 hover:text-red-900">Excluir</button>
+                        <a class="text-red-600 hover:text-red-900" th:href="@{/necessidade/excluir/{id}(id=${necessidade.id})}">Excluir</a>
                     </td>
                 </tr>
                 </tbody>
@@ -277,10 +276,9 @@
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${@localeConfig.formatDate(solicitacao.dataAcontecimento, #locale)}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button class="text-blue-600 hover:text-blue-900 mr-3">Detalhar</button>
-                        <button class="text-green-600 hover:text-green-900 mr-3">Aprovar</button>
-                        <button class="text-red-600 hover:text-gray-900 mr-3">Negar</button>
-                        <button class="text-red-800 hover:text-gray-900">Excluir</button>
+                        <a class="text-green-600 hover:text-green-900 mr-3" th:href="@{/ajuda/aprovar/{id}(id=${solicitacao.id})}">Aprovar</a>
+                        <a class="text-red-600 hover:text-gray-900 mr-3" th:href="@{/ajuda/negar/{id}(id=${solicitacao.id})}">Negar</a>
+                        <a class="text-red-800 hover:text-gray-900" th:href="@{/ajuda/excluir/{id}(id=${solicitacao.id})}">Excluir</a>
                     </td>
                 </tr>
                 </tbody>

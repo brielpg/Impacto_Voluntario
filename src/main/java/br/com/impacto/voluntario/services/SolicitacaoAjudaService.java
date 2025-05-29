@@ -4,6 +4,7 @@ import br.com.impacto.voluntario.dtos.CreateSolicitacaoAjudaDto;
 import br.com.impacto.voluntario.enums.AjudaRequeridaEnum;
 import br.com.impacto.voluntario.enums.StatusEnum;
 import br.com.impacto.voluntario.exceptions.InvalidDateException;
+import br.com.impacto.voluntario.exceptions.ObjectNotFoundException;
 import br.com.impacto.voluntario.models.Endereco;
 import br.com.impacto.voluntario.models.SolicitacaoAjuda;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
@@ -44,6 +45,35 @@ public class SolicitacaoAjudaService {
     @Transactional(readOnly = true)
     public List<SolicitacaoAjuda> getAll() {
         return repository.findAllByAtivo();
+    }
+
+    @Transactional
+    public void excluir(Long id) {
+        var solicitacao = this.findById(id);
+        solicitacao.setAtivo(false);
+        repository.save(solicitacao);
+    }
+
+    @Transactional
+    public void negar(Long id) {
+        var solicitacao = this.findById(id);
+        solicitacao.setStatus(StatusEnum.NEGADO);
+        repository.save(solicitacao);
+    }
+
+    @Transactional
+    public void aprovar(Long id) {
+        var solicitacao = this.findById(id);
+        solicitacao.setStatus(StatusEnum.APROVADO);
+        repository.save(solicitacao);
+    }
+
+    @Transactional
+    private SolicitacaoAjuda findById(Long id){
+        if (!repository.existsById(id))
+            throw new ObjectNotFoundException("Solicitacao with id: "+id+" not found");
+
+        return repository.getReferenceById(id);
     }
 
     private SolicitacaoAjuda dtoToEntity(CreateSolicitacaoAjudaDto dto){

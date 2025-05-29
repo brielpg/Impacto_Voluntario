@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,5 +30,23 @@ public class SolicitacaoAjudaController {
         var solicitacao = service.create(dto);
         model.addAttribute("solicitacao", solicitacao);
         return "redirect:/primeirosSocorros";
+    }
+
+    @GetMapping("/negar/{id}")
+    public String negarSolicitacao(@PathVariable Long id){
+        service.negar(id);
+        return "redirect:/admin/painel";
+    }
+
+    @GetMapping("/aprovar/{id}")
+    public String aprovarSolicitacao(@PathVariable Long id){
+        service.aprovar(id);
+        return "redirect:/admin/painel";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirSolicitacao(@PathVariable Long id){
+        service.excluir(id);
+        return "redirect:/admin/painel";
     }
 }
