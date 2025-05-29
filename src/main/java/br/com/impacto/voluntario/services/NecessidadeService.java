@@ -52,7 +52,7 @@ public class NecessidadeService {
     }
 
     @Transactional
-    private Necessidade findById(Long id){
+    public Necessidade findById(Long id){
         if (!repository.existsById(id))
             throw new ObjectNotFoundException("Necessidade with id: "+id+" not found");
 
