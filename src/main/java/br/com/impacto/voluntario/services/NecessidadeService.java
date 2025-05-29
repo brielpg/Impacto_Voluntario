@@ -22,6 +22,9 @@ public class NecessidadeService {
     private NecessidadeRepository repository;
 
     @Autowired
+    private VoluntarioService voluntarioService;
+
+    @Autowired
     private EnderecoRepository enderecoRepository;
 
     @Transactional
@@ -48,6 +51,19 @@ public class NecessidadeService {
     public void excluir(Long id) {
         var necessidade = this.findById(id);
         necessidade.setAtivo(false);
+        this.save(necessidade);
+    }
+
+    @Transactional
+    public void finalizar(Long id) {
+        var necessidade = this.findById(id);
+        necessidade.setStatus(StatusEnum.FINALIZADO);
+        necessidade.setAtivo(false);
+        necessidade.getVoluntarios().forEach(v -> {
+            v.setMissoesConcluidas(v.getMissoesConcluidas() + 1);
+            v.setVidasImpactadas(v.getVidasImpactadas() + necessidade.getPessoasAfetadas());
+            voluntarioService.save(v);
+        });
         this.save(necessidade);
     }
 

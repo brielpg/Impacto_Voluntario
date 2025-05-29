@@ -11,6 +11,7 @@ import br.com.impacto.voluntario.models.Voluntario;
 import br.com.impacto.voluntario.repositories.EnderecoRepository;
 import br.com.impacto.voluntario.repositories.VoluntarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,6 +32,7 @@ public class VoluntarioService implements UserDetailsService {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
+    @Lazy
     private NecessidadeService necessidadeService;
 
     @Autowired

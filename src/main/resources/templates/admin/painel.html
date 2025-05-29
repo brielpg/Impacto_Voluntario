@@ -199,7 +199,7 @@
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <button class="text-green-600 hover:text-blue-900 mr-3">Finalizar</button>
+                        <a class="text-green-600 hover:text-blue-900 mr-3" th:href="@{/necessidade/finalizar/{id}(id=${necessidade.id})}">Finalizar</a>
                         <a class="text-red-600 hover:text-red-900" th:href="@{/necessidade/excluir/{id}(id=${necessidade.id})}">Excluir</a>
                     </td>
                 </tr>

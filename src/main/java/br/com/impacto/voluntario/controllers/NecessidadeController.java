@@ -39,4 +39,10 @@ public class NecessidadeController {
         service.excluir(id);
         return "redirect:/admin/painel";
     }
+
+    @GetMapping("/finalizar/{id}")
+    public String finalizarNecessidade(@PathVariable Long id){
+        service.finalizar(id);
+        return "redirect:/admin/painel";
+    }
 }
