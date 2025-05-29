@@ -45,6 +45,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div th:each="necessidade : ${voluntario.necessidades}"
              th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'border-green-500' :
+                            necessidade.status.descricao == 'Finalizado' ? 'bg-green-50 border-green-400' :
                             necessidade.urgencia.descricao == 'Média' ? 'border-blue-500' :
                             necessidade.urgencia.descricao == 'Alta' ? 'border-yellow-500' :
                             'border-red-500'}"
@@ -73,7 +74,11 @@
                           necessidade.urgencia.descricao == 'Alta' ? 'text-yellow-600' :
                           'text-red-600'}"> </span>
             </div>
-            <a class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300"
+            <a th:if="${necessidade.status.descricao == 'Finalizado'}"
+               class="bg-green-500 text-white font-semibold px-6 py-2 rounded-full cursor-not-allowed">FINALIZADO</a>
+
+            <a th:if="${necessidade.status.descricao == 'Em Andamento'}"
+               class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300"
                th:href="@{/voluntario/cancelar/{id}(id=${necessidade.id})}">Cancelar Inscrição</a>
         </div>
     </div>
