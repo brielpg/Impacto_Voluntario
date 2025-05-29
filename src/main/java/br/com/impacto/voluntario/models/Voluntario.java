@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -49,6 +50,13 @@ public class Voluntario implements UserDetails {
     @Column(name = "habilidade")
     private List<HabilidadesEnum> habilidades;
     private String habilidadeOutro;
+    @ManyToMany
+    @JoinTable(
+            name = "voluntario_necessidade",
+            joinColumns = @JoinColumn(name = "voluntario_id"),
+            inverseJoinColumns = @JoinColumn(name = "necessidade_id")
+    )
+    private List<Necessidade> necessidades = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

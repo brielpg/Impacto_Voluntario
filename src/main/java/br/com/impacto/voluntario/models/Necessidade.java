@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -43,4 +44,7 @@ public class Necessidade {
     @Column(name = "habilidade")
     private List<HabilidadesEnum> habilidadesRequeridas;
     private String habilidadeOutro;
+    @ManyToMany(mappedBy = "necessidades")
+    private List<Voluntario> voluntarios = new ArrayList<>();
+    private Integer qtdVoluntarios = 0;
 }
