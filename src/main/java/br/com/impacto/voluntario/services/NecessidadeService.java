@@ -51,6 +51,12 @@ public class NecessidadeService {
     public void excluir(Long id) {
         var necessidade = this.findById(id);
         necessidade.setAtivo(false);
+        necessidade.getVoluntarios().forEach(v -> {
+            v.getNecessidades().remove(necessidade);
+            voluntarioService.save(v);
+        });
+        necessidade.getVoluntarios().clear();
+        necessidade.setQtdVoluntarios(0);
         this.save(necessidade);
     }
 
