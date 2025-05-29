@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Endereco {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "endereco_seq")
-    @SequenceGenerator(name = "endereco_seq", sequenceName = "endereco_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cep;
     private String cidade;
