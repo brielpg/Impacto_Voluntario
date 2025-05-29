@@ -35,12 +35,14 @@ public class NecessidadeController {
     }
 
     @GetMapping("/excluir/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String excluirNecessidade(@PathVariable Long id){
         service.excluir(id);
         return "redirect:/admin/painel";
     }
 
     @GetMapping("/finalizar/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String finalizarNecessidade(@PathVariable Long id){
         service.finalizar(id);
         return "redirect:/admin/painel";
