@@ -70,7 +70,7 @@
             </div>
 
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Voluntários Cadastrados:</span> <span>0</span>
+                <span class="font-semibold">Voluntários Cadastrados:</span> <span th:text="${necessidade.qtdVoluntarios}"></span>
             </div>
 
             <div class="text-gray-700 text-sm mb-4">
@@ -81,7 +81,8 @@
                           necessidade.urgencia.descricao == 'Alta' ? 'text-yellow-600' :
                           'text-red-600'}"> </span>
             </div>
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Quero Ajudar</button>
+            <a class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300"
+               th:href="@{/voluntario/ajudar/{id}(id=${necessidade.id})}">Quero Ajudar</a>
         </div>
     </div>
 </div>

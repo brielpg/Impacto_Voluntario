@@ -34,7 +34,7 @@ public class NecessidadeService {
         necessidade.setDataEnvio(LocalDate.now());
         necessidade.setAtivo(true);
 
-        repository.save(necessidade);
+        this.save(necessidade);
 
         return necessidade;
     }
@@ -48,7 +48,7 @@ public class NecessidadeService {
     public void excluir(Long id) {
         var necessidade = this.findById(id);
         necessidade.setAtivo(false);
-        repository.save(necessidade);
+        this.save(necessidade);
     }
 
     @Transactional
@@ -57,6 +57,11 @@ public class NecessidadeService {
             throw new ObjectNotFoundException("Necessidade with id: "+id+" not found");
 
         return repository.getReferenceById(id);
+    }
+
+    @Transactional
+    public void save(Necessidade necessidade){
+        repository.save(necessidade);
     }
 
     private Necessidade dtoToEntity(CreateNecessidadeDto dto){

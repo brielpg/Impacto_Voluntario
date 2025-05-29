@@ -31,6 +31,9 @@ public class VoluntarioService implements UserDetailsService {
     private EnderecoRepository enderecoRepository;
 
     @Autowired
+    private NecessidadeService necessidadeService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -54,6 +57,20 @@ public class VoluntarioService implements UserDetailsService {
         repository.save(voluntario);
 
         return voluntario;
+    }
+
+    @Transactional
+    public void queroAjudar(String email, Long necessidadeId) {
+        var voluntario = this.getByEmail(email);
+        var necessidade = necessidadeService.findById(necessidadeId);
+
+        if (!voluntario.getNecessidades().contains(necessidade)) {
+            voluntario.getNecessidades().add(necessidade);
+            necessidade.getVoluntarios().add(voluntario);
+            necessidade.setQtdVoluntarios(necessidade.getVoluntarios().size());
+            repository.save(voluntario);
+            necessidadeService.save(necessidade);
+        }
     }
 
     @Transactional(readOnly = true)
