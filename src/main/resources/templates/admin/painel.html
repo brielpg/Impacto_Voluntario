@@ -185,9 +185,17 @@
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${necessidade.status.descricao}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                    <span aria-hidden="true" class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                    <span class="relative" th:text="${necessidade.urgencia.descricao}"></span>
+                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+                                    <span aria-hidden="true" class="absolute inset-0 opacity-50 rounded-full"
+                                          th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'bg-green-200' :
+                                              necessidade.urgencia.descricao == 'Média' ? 'bg-blue-200' :
+                                              necessidade.urgencia.descricao == 'Alta' ? 'bg-yellow-200' :
+                                              'bg-red-200'}"></span>
+                                    <span class="relative" th:text="${necessidade.urgencia.descricao}"
+                                          th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'text-green-900' :
+                                              necessidade.urgencia.descricao == 'Média' ? 'text-blue-900' :
+                                              necessidade.urgencia.descricao == 'Alta' ? 'text-yellow-900' :
+                                              'text-red-900'}"></span>
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -245,15 +253,24 @@
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${solicitacao.endereco.cidade} + '/' + ${solicitacao.endereco.uf}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                    <span aria-hidden="true" class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                    <span class="relative" th:text="${solicitacao.urgencia.descricao}"></span>
+                                <span class="relative inline-block px-3 py-1 font-bold leading-tight">
+                                    <span class="relative" th:text="${solicitacao.urgencia}"
+                                          th:classappend="${solicitacao.urgencia.descricao == 'Baixa' ? 'text-green-600' :
+                                              solicitacao.urgencia.descricao == 'Média' ? 'text-blue-600' :
+                                              solicitacao.urgencia.descricao == 'Alta' ? 'text-yellow-600' :
+                                              'text-red-600'}"></span>
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span class="relative inline-block px-3 py-1 font-semibold text-yellow-900 leading-tight">
-                                    <span aria-hidden="true" class="absolute inset-0 bg-yellow-200 opacity-50 rounded-full"></span>
-                                    <span class="relative" th:text="${solicitacao.status.descricao}"></span>
+                                <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+                                    <span aria-hidden="true" class="absolute inset-0 opacity-50 rounded-full"
+                                          th:classappend="${solicitacao.status.descricao == 'Aprovado' ? 'bg-green-200' :
+                                              solicitacao.status.descricao == 'Negado' ? 'bg-red-200' :
+                                              'bg-yellow-200'}"></span>
+                                    <span class="relative" th:text="${solicitacao.status.descricao}"
+                                          th:classappend="${solicitacao.status.descricao == 'Aprovado' ? 'text-green-900' :
+                                              solicitacao.status.descricao == 'Negado' ? 'text-red-900' :
+                                              'text-yellow-900'}"></span>
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
