@@ -54,7 +54,7 @@ public class VoluntarioService implements UserDetailsService {
         voluntario.setVidasImpactadas(0);
         voluntario.setRole(Roles.USER);
 
-        repository.save(voluntario);
+        this.save(voluntario);
 
         return voluntario;
     }
@@ -68,7 +68,7 @@ public class VoluntarioService implements UserDetailsService {
             voluntario.getNecessidades().add(necessidade);
             necessidade.getVoluntarios().add(voluntario);
             necessidade.setQtdVoluntarios(necessidade.getVoluntarios().size());
-            repository.save(voluntario);
+            this.save(voluntario);
             necessidadeService.save(necessidade);
         }
     }
@@ -79,6 +79,11 @@ public class VoluntarioService implements UserDetailsService {
                 .orElseThrow(() -> new ObjectNotFoundException("Voluntario with email \""+email+"\" not found"));
 
         return (Voluntario) voluntario;
+    }
+
+    @Transactional
+    public void save(Voluntario voluntario){
+        repository.save(voluntario);
     }
 
     private Voluntario dtoToEntity(CreateVoluntarioDto dto){
