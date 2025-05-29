@@ -43,13 +43,13 @@ INSERT INTO necessidades (titulo, pessoas_afetadas, descricao, endereco_id, desa
 VALUES ('Suporte Médico em Região Alagada', 10, 'Descricao braba Descricao braba Descricao braba', 2, 'ENCHENTE', 'ALTISSIMA', 'ANDAMENTO', TO_DATE('28-05-2025', 'DD-MM-YYYY'), 1, 'Primeiros Socorros', 0);
 
 INSERT INTO necessidades (titulo, pessoas_afetadas, descricao, endereco_id, desastre, urgencia, status, data_envio, ativo, habilidade_outro, qtd_voluntarios)
-VALUES ('Resgate em Área de Terremoto', 20, 'Descricao braba Descricao braba Descricao braba', 3, 'TERREMOTO', 'ALTA', 'ANALISE', TO_DATE('25-05-2025', 'DD-MM-YYYY'), 1, NULL, 0);
+VALUES ('Resgate em Área de Terremoto', 20, 'Descricao braba Descricao braba Descricao braba', 3, 'TERREMOTO', 'ALTA', 'ANDAMENTO', TO_DATE('25-05-2025', 'DD-MM-YYYY'), 1, NULL, 0);
 
 INSERT INTO necessidades (titulo, pessoas_afetadas, descricao, endereco_id, desastre, urgencia, status, data_envio, ativo, habilidade_outro, qtd_voluntarios)
-VALUES ('Distribuição de Alimentos em Região de Seca', 15, 'Descricao braba Descricao braba Descricao braba', 4, 'SECA', 'MEDIA', 'APROVADO', TO_DATE('20-05-2025', 'DD-MM-YYYY'), 1, 'Organização de Estoques', 0);
+VALUES ('Distribuição de Alimentos em Região de Seca', 15, 'Descricao braba Descricao braba Descricao braba', 4, 'SECA', 'MEDIA', 'ANDAMENTO', TO_DATE('20-05-2025', 'DD-MM-YYYY'), 1, 'Organização de Estoques', 0);
 
 INSERT INTO necessidades (titulo, pessoas_afetadas, descricao, endereco_id, desastre, urgencia, status, data_envio, ativo, habilidade_outro, qtd_voluntarios)
-VALUES ('Suporte Psicológico para Vítimas de Incêndio', 5, 'Descricao braba Descricao braba Descricao braba', 5, 'INCENDIO', 'BAIXA', 'FINALIZADO', TO_DATE('10-05-2025', 'DD-MM-YYYY'), 1, NULL, 0);
+VALUES ('Suporte Psicológico para Vítimas de Incêndio', 5, 'Descricao braba Descricao braba Descricao braba', 5, 'INCENDIO', 'BAIXA', 'ANDAMENTO', TO_DATE('10-05-2025', 'DD-MM-YYYY'), 1, NULL, 0);
 
 
 INSERT INTO necessidade_habilidades (necessidade_id, habilidade) VALUES (1, 'ENFERMEIRO');
