@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title th:text="#{home.titulo}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans antialiased bg-gray-100 text-gray-800">
@@ -14,40 +14,40 @@
 
 <header class="bg-cover bg-center h-screen flex items-center justify-center text-center">
     <div class="bg-black bg-opacity-50 p-8 rounded-lg max-w-3xl mx-auto">
-        <h1 class="text-5xl font-extrabold text-white mb-4 leading-tight">Conectando Corações em Tempos de Crise</h1>
-        <p class="text-xl text-gray-200 mb-16">Sua ajuda é a esperança para comunidades afetadas por desastres naturais. Junte-se a nós.</p>
+        <h1 class="text-5xl font-extrabold text-white mb-4 leading-tight" th:text="#{home.titulo_pagina}"></h1>
+        <p class="text-xl text-gray-200 mb-16" th:text="#{home.descricao}"></p>
         <div class="space-x-4">
-            <a href="/voluntario" class="bg-blue-600 text-white text-lg px-8 py-4 rounded-full hover:bg-blue-700 transition duration-300 font-semibold shadow-lg">Seja um Voluntário</a>
-            <a href="/ajuda" class="bg-yellow-500 text-white text-lg px-8 py-4 rounded-full hover:bg-yellow-600 transition duration-300 font-semibold shadow-lg">Solicite Ajuda</a>
+            <a href="/voluntario" class="bg-blue-600 text-white text-lg px-8 py-4 rounded-full hover:bg-blue-700 transition duration-300 font-semibold shadow-lg" th:text="#{home.botao_voluntario}"></a>
+            <a href="/ajuda" class="bg-yellow-500 text-white text-lg px-8 py-4 rounded-full hover:bg-yellow-600 transition duration-300 font-semibold shadow-lg" th:text="#{home.botao_solicite_ajuda}"></a>
         </div>
     </div>
 </header>
 
 <section id="about" class="py-20 bg-white">
     <div class="container mx-auto text-center px-4">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">Nossa Missão</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">A Plataforma Resgate Solidário visa ser o elo entre voluntários dispostos a ajudar e comunidades que necessitam de apoio emergencial em momentos de desastre natural. Facilitamos a coordenação, otimizando recursos e acelerando o processo de recuperação.</p>
+        <h2 class="text-4xl font-bold text-gray-800 mb-6" th:text="#{home.nossa_missao}"></h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed" th:text="#{home.missao_descricao}"></p>
     </div>
 </section>
 
 <section id="how-it-works" class="py-20 bg-gray-200">
     <div class="container mx-auto text-center px-4">
-        <h2 class="text-4xl font-bold text-gray-800 mb-12">Como Funciona</h2>
+        <h2 class="text-4xl font-bold text-gray-800 mb-12" th:text="#{home.como_funciona}"></h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
                 <div class="text-blue-600 text-5xl mb-4">🌍</div>
-                <h3 class="text-2xl font-semibold text-gray-800 mb-3">Identifique uma Necessidade</h3>
-                <p class="text-gray-600">Comunidades afetadas registram suas demandas urgentes de ajuda.</p>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3" th:text="#{home.identifique_necessidade}"></h3>
+                <p class="text-gray-600" th:text="#{home.identifique_necessidade_desc}"></p>
             </div>
             <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
                 <div class="text-blue-600 text-5xl mb-4">🤝</div>
-                <h3 class="text-2xl font-semibold text-gray-800 mb-3">Conecte-se a Voluntários</h3>
-                <p class="text-gray-600">Voluntários com diversas habilidades se cadastram para oferecer suporte.</p>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3" th:text="#{home.conecte_voluntarios}"></h3>
+                <p class="text-gray-600" th:text="#{home.conecte_voluntarios_desc}"></p>
             </div>
             <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300">
                 <div class="text-blue-600 text-5xl mb-4">🚀</div>
-                <h3 class="text-2xl font-semibold text-gray-800 mb-3">Ação Rápida e Eficiente</h3>
-                <p class="text-gray-600">Organizamos e otimizamos a logística da ajuda humanitária.</p>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3" th:text="#{home.acao_rapida}"></h3>
+                <p class="text-gray-600" th:text="#{home.acao_rapida_desc}"></p>
             </div>
         </div>
     </div>

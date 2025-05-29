@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title th:text="#{login.titulo}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -14,26 +14,26 @@
 
 <div class="font-sans antialiased text-gray-800 flex items-center justify-center min-h-screen py-10">
     <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
-        <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">Bem-vindo(a) de Volta!</h2>
-        <p class="text-center text-gray-600 mb-8">Entre para continuar ajudando a construir um futuro mais seguro.</p>
+        <h2 class="text-3xl font-bold text-center text-blue-700 mb-6" th:text="#{login.bem_vindo}"></h2>
+        <p class="text-center text-gray-600 mb-8" th:text="#{login.descricao}"></p>
 
         <form th:action="@{/login}" method="post">
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">E-mail</label>
-                <input type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="seuemail@exemplo.com" required>
+                <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{login.label_email}"></label>
+                <input type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{login.placeholder_email}" required>
             </div>
             <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
-                <input type="password" name="senha" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="********" required>
+                <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{login.label_senha}"></label>
+                <input type="password" name="senha" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{login.placeholder_senha}" required>
             </div>
             <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 w-full">Entrar</button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 w-full" th:text="#{login.botao_entrar}"></button>
             </div>
         </form>
 
         <p class="text-center text-gray-600 text-sm mt-8">
-            Ainda não tem uma conta?
-            <a href="/voluntario" class="font-bold text-blue-500 hover:text-blue-800">Cadastre-se</a>
+            <span th:text="#{login.sem_conta}"></span>
+            <a href="/voluntario" class="font-bold text-blue-500 hover:text-blue-800" th:text="#{login.cadastre_se}"></a>
         </p>
     </div>
 </div>

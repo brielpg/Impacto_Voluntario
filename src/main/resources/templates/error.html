@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ops! Ocorreu um Erro</title>
+    <title th:text="#{error.titulo}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -19,30 +19,30 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
             </svg>
         </div>
-        <h1 class="text-5xl font-extrabold text-gray-900 mb-4">Ops! Algo deu errado.</h1>
-        <p class="text-xl text-gray-600 mb-8">Parece que encontramos um problema inesperado.</p>
+        <h1 class="text-5xl font-extrabold text-gray-900 mb-4" th:text="#{error.titulo}"></h1>
+        <p class="text-xl text-gray-600 mb-8" th:text="#{error.descricao}"></p>
 
         <div class="bg-red-50 border border-red-200 text-red-800 p-6 rounded-lg text-left mb-8">
-            <h3 class="text-2xl font-bold mb-3">Detalhes do Erro:</h3>
+            <h3 class="text-2xl font-bold mb-3" th:text="#{error.detalhes_erro}"></h3>
             <div class="mb-2">
-                <span class="font-semibold">Status do Erro:</span> <span id="error-status" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${status}"></span>
+                <span class="font-semibold" th:text="#{error.status_erro}"></span> <span id="error-status" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${status}"></span>
             </div>
             <div class="mb-2">
-                <span class="font-semibold">Tipo do Erro:</span> <span id="error-type" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${error}"></span>
+                <span class="font-semibold" th:text="#{error.tipo_erro}"></span> <span id="error-type" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${error}"></span>
             </div>
             <div>
-                <span class="font-semibold">Mensagem:</span> <span id="error-message" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${message}"></span>
+                <span class="font-semibold" th:text="#{error.mensagem}"></span> <span id="error-message" class="font-mono bg-red-100 px-2 py-1 rounded-md" th:text="${message}"></span>
             </div>
         </div>
 
-        <p class="text-gray-700 mb-8">
-            Nossa equipe já foi notificada sobre este ocorrido e está trabalhando para resolvê-lo.
-            Pedimos desculpas pelo inconveniente.
-        </p>
+        <div class="text-gray-700 mb-8">
+            <p th:text="#{error.aviso}"></p>
+            <p th:text="#{error.pedimos_desculpas}"></p>
+        </div>
 
         <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l7 7m-7-7v10a1 1 0 01-1 1H6"></path></svg>
-            Voltar para a Página Inicial
+            <span th:text="#{error.voltar_pagina_inicial}"></span>
         </a>
     </div>
 </div>

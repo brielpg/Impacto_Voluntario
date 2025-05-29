@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard do Voluntário</title>
+    <title th:text="#{dashboard.title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans antialiased bg-gray-100 text-gray-800">
@@ -13,34 +13,38 @@
 </div>
 
 <div class="container mx-auto p-6 mt-8">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6">Olá, <span th:text="${voluntario.nome}"></span>!</h1>
-    <p class="text-lg text-gray-600 mb-8">Bem-vindo(a) ao seu painel de controle. Aqui você pode encontrar e gerenciar oportunidades de ajuda.</p>
+    <div class="text-4xl font-bold text-gray-800 mb-6 inline-flex">
+        <h1 th:text="#{dashboard.greeting}"></h1>
+        <h1 class="ml-2" th:text="${voluntario.nome}"></h1>
+        <h1>!</h1>
+    </div>
+    <p class="text-lg text-gray-600 mb-8" th:text="#{dashboard.welcome}"></p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
             <div>
-                <h3 class="text-xl font-semibold text-gray-700">Oportunidades Ativas</h3>
+                <h3 class="text-xl font-semibold text-gray-700" th:text="#{dashboard.activeOpportunities}"></h3>
                 <p class="text-blue-600 text-4xl font-bold" th:text="${oportunidades}"></p>
             </div>
             <div class="text-blue-500 text-5xl">🚨</div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
             <div>
-                <h3 class="text-xl font-semibold text-gray-700">Missões Concluídas</h3>
+                <h3 class="text-xl font-semibold text-gray-700" th:text="#{dashboard.completedMissions}"></h3>
                 <p class="text-green-600 text-4xl font-bold" th:text="${voluntario.missoesConcluidas}"></p>
             </div>
             <div class="text-green-500 text-5xl">✅</div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
             <div>
-                <h3 class="text-xl font-semibold text-gray-700">Vidas Impactadas</h3>
+                <h3 class="text-xl font-semibold text-gray-700" th:text="#{dashboard.impactedLives}"></h3>
                 <p class="text-gray-950 text-4xl font-bold" th:text="${voluntario.vidasImpactadas}"></p>
             </div>
             <div class="text-red-500 text-5xl">❤️</div>
         </div>
     </div>
 
-    <h2 class="text-3xl font-bold text-gray-800 mb-6">Minhas Inscrições</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6" th:text="#{dashboard.myRegistrations}"></h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div th:each="necessidade : ${voluntario.necessidades}"
@@ -52,22 +56,25 @@
              class="bg-white rounded-lg shadow-md p-6 border-l-4 hover:shadow-lg transition duration-300">
 
             <h3 class="text-2xl font-semibold text-gray-800 mb-2" th:text="${necessidade.titulo} + ' - ' + ${necessidade.endereco.cidade} +'/'+ ${necessidade.endereco.uf}"></h3>
-            <p class="text-gray-600 mb-3" th:text="${necessidade.descricao}">Descrição da necessidade</p>
+            <p class="text-gray-600 mb-3" th:text="${necessidade.descricao}"></p>
 
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Tipo de Desastre:</span> <span th:text="${necessidade.desastre.descricao}"></span>
+                <span class="font-semibold" th:text="#{necessidades.card.disasterType}"></span>
+                <span th:text="${necessidade.desastre.descricao}"></span>
             </div>
 
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Local:</span> <span th:text="${necessidade.endereco.cidade} + ', ' + ${necessidade.endereco.uf}"></span>
+                <span class="font-semibold" th:text="#{necessidades.card.location}"></span>
+                <span th:text="${necessidade.endereco.cidade} + ', ' + ${necessidade.endereco.uf}"></span>
             </div>
 
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Voluntários Cadastrados:</span> <span th:text="${necessidade.qtdVoluntarios}"></span>
+                <span class="font-semibold" th:text="#{necessidades.card.registeredVolunteers}"></span>
+                <span th:text="${necessidade.qtdVoluntarios}"></span>
             </div>
 
             <div class="text-gray-700 text-sm mb-4">
-                <span class="font-semibold">Urgência:</span>
+                <span class="font-semibold" th:text="#{necessidades.card.urgency}"></span>
                 <span class="font-bold" th:text="${necessidade.urgencia}"
                       th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'text-green-600' :
                           necessidade.urgencia.descricao == 'Média' ? 'text-blue-600' :
@@ -75,16 +82,16 @@
                           'text-red-600'}"> </span>
             </div>
             <a th:if="${necessidade.status.descricao == 'Finalizado'}"
-               class="bg-green-500 text-white font-semibold px-6 py-2 rounded-full cursor-not-allowed">FINALIZADO</a>
+               class="bg-green-500 text-white font-semibold px-6 py-2 rounded-full cursor-not-allowed" th:text="#{dashboard.status.finalized}"></a>
 
             <a th:if="${necessidade.status.descricao == 'Em Andamento'}"
                class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300"
-               th:href="@{/voluntario/cancelar/{id}(id=${necessidade.id})}">Cancelar Inscrição</a>
+               th:href="@{/voluntario/cancelar/{id}(id=${necessidade.id})}" th:text="#{dashboard.status.inProgress}"></a>
         </div>
     </div>
 
     <div class="text-center mt-10">
-        <a href="/necessidade" class="bg-gray-300 text-gray-800 px-8 py-3 rounded-full hover:bg-gray-400 transition duration-300">Ver Todas as Oportunidades</a>
+        <a href="/necessidade" class="bg-gray-300 text-gray-800 px-8 py-3 rounded-full hover:bg-gray-400 transition duration-300" th:text="#{dashboard.viewAllOpportunities}"></a>
     </div>
 </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Voluntário</title>
+    <title th:text="#{cadastro.title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
@@ -14,115 +14,119 @@
 
 <div class="font-sans antialiased text-gray-800 flex items-center justify-center min-h-screen py-10">
     <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
-        <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">Cadastre-se como Voluntário</h2>
-        <p class="text-center text-gray-600 mb-8">Seja a mudança que o mundo precisa. Preencha seus dados para começar.</p>
+        <h2 class="text-3xl font-bold text-center text-blue-700 mb-6" th:text="#{cadastro.header}"></h2>
+        <p class="text-center text-gray-600 mb-8" th:text="#{cadastro.description}"></p>
 
         <form th:action="@{/voluntario}" method="post">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Nome Completo</label>
-                    <input type="text" name="nome" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Seu nome" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.nome}"></label>
+                    <input type="text" name="nome" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.nome}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">E-mail</label>
-                    <input type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="seuemail@exemplo.com" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.email}"></label>
+                    <input type="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.email}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Telefone</label>
-                    <input type="tel" name="telefone" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(XX) XXXXX-XXXX" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.telefone}"></label>
+                    <input type="tel" name="telefone" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.telefone}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">CPF</label>
-                    <input type="tel" name="cpf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 000.000.000-00" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.cpf}"></label>
+                    <input type="tel" name="cpf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.cpf}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Data de Nascimento</label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.dataNascimento}"></label>
                     <input type="date" name="dataNascimento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Senha</label>
-                    <input type="password" name="senha" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="********" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.senha}"></label>
+                    <input type="password" name="senha" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.senha}" required>
                 </div>
 
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">CEP</label>
-                    <input type="text" name="endereco.cep" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00000-000" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.cep}"></label>
+                    <input type="text" name="endereco.cep" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.cep}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Cidade</label>
-                    <input type="text" name="endereco.cidade" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: São Paulo" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.cidade}"></label>
+                    <input type="text" name="endereco.cidade" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.cidade}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">UF</label>
-                    <input type="text" name="endereco.uf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: SP, RJ" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.uf}"></label>
+                    <input type="text" name="endereco.uf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.uf}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Bairro</label>
-                    <input type="text" name="endereco.bairro" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Jardim Paulista" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.bairro}"></label>
+                    <input type="text" name="endereco.bairro" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.bairro}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Número</label>
-                    <input type="text" name="endereco.numero" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00" required>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.numero}"></label>
+                    <input type="text" name="endereco.numero" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.numero}" required>
                 </div>
                 <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Complemento (opcional)</label>
-                    <input type="text" name="endereco.complemento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Complemento">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.complemento}"></label>
+                    <input type="text" name="endereco.complemento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" th:placeholder="#{cadastro.placeholder.complemento}">
                 </div>
             </div>
 
 
             <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Suas Habilidades</label>
+                <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{cadastro.label.habilidades}"></label>
                 <div class="flex flex-wrap gap-3">
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="MEDICO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Médico(a)</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.medico}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="ENFERMEIRO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Enfermeiro(a)</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.enfermeiro}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="ENGENHEIRO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Engenheiro(a)</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.engenheiro}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="RESGATE" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Resgate</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.resgate}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="COZINHA" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Cozinha/Alimentos</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.cozinha}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="LOGISTICA" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Logística</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.logistica}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="PSICOLOGO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Psicólogo(a)</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.psicologo}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="EDUCACAO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Educação</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.educacao}"></span>
                     </label>
                     <label class="inline-flex items-center">
                     <input type="checkbox" name="habilidades" value="OUTRO" class="form-checkbox h-5 w-5 text-blue-600">
-                        <span class="ml-2 text-gray-700">Outro (especificar)</span>
+                        <span class="ml-2 text-gray-700" th:text="#{cadastro.checkbox.outro}"></span>
                     </label>
                 </div>
-                <input type="text" name="habilidadeOutro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2" placeholder="Especifique outras habilidades">
+                <input type="text" name="habilidadeOutro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2" th:placeholder="#{cadastro.placeholder.outro}">
             </div>
 
             <div class="mb-6">
                 <label class="inline-flex items-center">
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" required>
-                    <span class="ml-2 text-gray-700 text-sm">Eu concordo com os <a href="#" class="text-blue-500 hover:text-blue-800 font-bold">Termos de Serviço</a> e <a href="#" class="text-blue-500 hover:text-blue-800 font-bold">Política de Privacidade</a>.</span>
+                    <span class="ml-2 text-gray-700 text-sm" th:text="#{cadastro.checkbox.termos}"></span>
+                    <a href="#" class="ml-1 text-blue-500 text-base hover:text-blue-800 font-bold" th:text="#{cadastro.checkbox.termos1}"></a>
+                    <span class="ml-1 text-gray-700 text-sm" th:text="#{cadastro.checkbox.termos2}"></span>
+                    <a href="#" class="ml-1 text-blue-500 text-base hover:text-blue-800 font-bold" th:text="#{cadastro.checkbox.termos3}"></a>
+                    <span class="text-gray-700 text-sm">.</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-between">
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 w-full">Cadastrar</button>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 w-full" th:text="#{cadastro.botao.cadastrar}"></button>
             </div>
         </form>
     </div>

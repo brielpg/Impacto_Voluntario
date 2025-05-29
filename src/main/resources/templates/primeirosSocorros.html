@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primeiros Socorros e Orientações</title>
+    <title th:text="#{primeirosSocorros.titulo}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans antialiased bg-gray-100 text-gray-800">
@@ -13,84 +13,94 @@
 </div>
 
 <div class="container mx-auto p-6 mt-8">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Orientações de Primeiros Socorros em Desastres</h1>
-    <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto">Informações essenciais para agir de forma segura e eficaz em situações de emergência. Lembre-se: estas informações não substituem o atendimento profissional.</p>
+    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center" th:text="#{primeirosSocorros.titulo_pagina}"></h1>
+    <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto" th:text="#{primeirosSocorros.descricao}"></p>
 
     <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-10 rounded-lg shadow-md" role="alert">
-        <h3 class="font-bold text-xl mb-2">Em caso de emergência, ligue imediatamente:</h3>
+        <h3 class="font-bold text-xl mb-2" th:text="#{primeirosSocorros.emergencia}"></h3>
         <ul class="list-disc list-inside text-lg">
-            <li><span class="font-semibold">SAMU:</span> 192</li>
-            <li><span class="font-semibold">Bombeiros:</span> 193</li>
-            <li><span class="font-semibold">Defesa Civil:</span> 199 (ou número local)</li>
+            <li><span class="font-semibold" th:text="#{primeirosSocorros.samu}"></span> 192</li>
+            <li><span class="font-semibold" th:text="#{primeirosSocorros.bombeiros}"></span> 193</li>
+            <li><span class="font-semibold" th:text="#{primeirosSocorros.defesaCivil}"></span>
+                <span th:text="#{primeirosSocorros.defesaCivil2}"></span></li>
         </ul>
-        <p class="mt-3 text-sm">Descreva a situação claramente e informe sua localização exata.</p>
+        <p class="mt-3 text-sm" th:text="#{primeirosSocorros.descreva_situacao}"></p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                <span class="text-4xl mr-3">🩹</span> Kit Essencial de Primeiros Socorros
-            </h2>
-            <p class="text-gray-700 mb-4">Tenha sempre um kit de primeiros socorros completo e acessível. Ele deve conter:</p>
+            <div class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                <span class="text-4xl mr-3">🩹</span>
+                <h2 th:text="#{primeirosSocorros.kit_essencial}"></h2>
+            </div>
+            <p class="text-gray-700 mb-4" th:text="#{primeirosSocorros.kit_essencial_desc}"></p>
             <ul class="list-disc list-inside text-gray-600 space-y-2">
-                <li>Ataduras, gazes estéreis, esparadrapo</li>
-                <li>Antissépticos (álcool 70%, iodo)</li>
-                <li>Analgésicos e antitérmicos</li>
-                <li>Luvas descartáveis, tesoura sem ponta</li>
-                <li>Máscara de RCP (se tiver treinamento)</li>
-                <li>Lanterna e pilhas extras</li>
-                <li>Apito, cobertor térmico</li>
+                <li th:text="#{primeirosSocorros.kit_item1}"></li>
+                <li th:text="#{primeirosSocorros.kit_item2}"></li>
+                <li th:text="#{primeirosSocorros.kit_item3}"></li>
+                <li th:text="#{primeirosSocorros.kit_item4}"></li>
+                <li th:text="#{primeirosSocorros.kit_item5}"></li>
+                <li th:text="#{primeirosSocorros.kit_item6}"></li>
+                <li th:text="#{primeirosSocorros.kit_item7}"></li>
             </ul>
         </div>
 
         <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                <span class="text-4xl mr-3">🌬️</span> Avaliação da Vítima (ABC)
-            </h2>
-            <p class="text-gray-700 mb-4">Antes de qualquer ação, avalie a situação e a vítima:</p>
+            <div class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                <span class="text-4xl mr-3">🌬️</span>
+                <h2 th:text="#{primeirosSocorros.avaliacao_vitima}"></h2>
+            </div>
+            <p class="text-gray-700 mb-4" th:text="#{primeirosSocorros.avaliacao_vitima_desc}"></p>
             <ul class="list-disc list-inside text-gray-600 space-y-2">
-                <li><span class="font-semibold">A - Via Aérea:</span> Verifique se há obstruções.</li>
-                <li><span class="font-semibold">B - Respiração:</span> Observe se a vítima está respirando normalmente.</li>
-                <li><span class="font-semibold">C - Circulação:</span> Verifique pulsos e sinais de sangramento grave.</li>
-                <li><span class="font-semibold">D - Dificuldade:</span> Avalie qualquer outra dificuldade ou lesão.</li>
-                <li><span class="font-semibold">E - Exposição:</span> Exponha a área lesionada, se necessário, controlando a temperatura.</li>
+                <li><span class="font-semibold" th:text="#{primeirosSocorros.avaliacao_a}"></span>
+                    <span th:text="#{primeirosSocorros.avaliacao_a2}"></span></li>
+                <li><span class="font-semibold" th:text="#{primeirosSocorros.avaliacao_b}"></span>
+                    <span th:text="#{primeirosSocorros.avaliacao_b2}"></span></li>
+                <li><span class="font-semibold" th:text="#{primeirosSocorros.avaliacao_c}"></span>
+                    <span th:text="#{primeirosSocorros.avaliacao_c2}"></span></li>
+                <li><span class="font-semibold" th:text="#{primeirosSocorros.avaliacao_d}"></span>
+                    <span th:text="#{primeirosSocorros.avaliacao_d2}"></span></li>
+                <li><span class="font-semibold" th:text="#{primeirosSocorros.avaliacao_e}"></span>
+                    <span th:text="#{primeirosSocorros.avaliacao_e2}"></span></li>
             </ul>
         </div>
 
         <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                <span class="text-4xl mr-3">🩸</span> Como Controlar Sangramentos Graves
-            </h2>
-            <p class="text-gray-700 mb-4">Aja rapidamente para estancar sangramentos abundantes:</p>
+            <div class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                <span class="text-4xl mr-3">🩸</span>
+                <h2 th:text="#{primeirosSocorros.controlar_sangramentos}"></h2>
+            </div>
+            <p class="text-gray-700 mb-4" th:text="#{primeirosSocorros.controlar_sangramentos_desc}"></p>
             <ul class="list-disc list-inside text-gray-600 space-y-2">
-                <li>Pressione firmemente o local do sangramento com um pano limpo ou gaze.</li>
-                <li>Eleve o membro afetado, se possível.</li>
-                <li>Não remova objetos encravados, apenas estabilize-os.</li>
-                <li>Aplique mais camadas de gaze se necessário, sem remover as anteriores.</li>
-                <li>Mantenha a pressão até a chegada da ajuda profissional.</li>
+                <li th:text="#{primeirosSocorros.sangramento_item1}"></li>
+                <li th:text="#{primeirosSocorros.sangramento_item2}"></li>
+                <li th:text="#{primeirosSocorros.sangramento_item3}"></li>
+                <li th:text="#{primeirosSocorros.sangramento_item4}"></li>
+                <li th:text="#{primeirosSocorros.sangramento_item5}"></li>
             </ul>
         </div>
 
         <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-            <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
-                <span class="text-4xl mr-3">🦴</span> O que fazer em caso de Fraturas
-            </h2>
-            <p class="text-gray-700 mb-4">Em caso de suspeita de fratura ou luxação:</p>
+            <div class="text-2xl font-bold text-blue-700 mb-4 flex items-center">
+                <span class="text-4xl mr-3">🦴</span>
+                <h2 th:text="#{primeirosSocorros.fraturas}"></h2>
+            </div>
+            <p class="text-gray-700 mb-4" th:text="#{primeirosSocorros.fraturas_desc}"></p>
             <ul class="list-disc list-inside text-gray-600 space-y-2">
-                <li>Imobilize a área afetada. Use talas improvisadas se tiver o conhecimento.</li>
-                <li>Não tente realinhar o membro.</li>
-                <li>Aplique compressa fria (gelo embrulhado) para reduzir inchaço.</li>
-                <li>Mantenha a vítima confortável e evite movimentos desnecessários.</li>
-                <li>Procure ajuda médica imediatamente.</li>
+                <li th:text="#{primeirosSocorros.fraturas_item1}"></li>
+                <li th:text="#{primeirosSocorros.fraturas_item2}"></li>
+                <li th:text="#{primeirosSocorros.fraturas_item3}"></li>
+                <li th:text="#{primeirosSocorros.fraturas_item4}"></li>
+                <li th:text="#{primeirosSocorros.fraturas_item5}"></li>
             </ul>
         </div>
 
     </div>
 
     <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mt-10 rounded-lg shadow-md" role="alert">
-        <p class="font-bold">Treinamento é fundamental!</p>
-        <p class="text-sm">Considere fazer um curso de primeiros socorros para estar mais preparado(a) para ajudar em emergências.</p>
+        <p class="font-bold" th:text="#{primeirosSocorros.treinamento}"></p>
+        <p class="text-sm" th:text="#{primeirosSocorros.treinamento_desc}"></p>
     </div>
 
 </div>

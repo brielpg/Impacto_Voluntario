@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo</title>
+    <title th:text="#{painel.titulo}"></title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         .tab-button.active {
@@ -18,156 +18,140 @@
 </div>
 
 <div class="container mx-auto p-6 mt-8">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Painel Administrativo</h1>
-    <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto">Gerencie as operações da plataforma, desde necessidades cadastradas até as solicitações de ajuda recebidas.</p>
+    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center" th:text="#{painel.titulo}"></h1>
+    <p class="text-lg text-gray-600 mb-10 text-center max-w-3xl mx-auto" th:text="#{painel.descricao}"></p>
 
     <div class="flex border-b border-gray-300 mb-8">
-        <button id="tab-manage-needs" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200 active" onclick="showTab('manage-needs')">
-            Gerenciar Necessidades
-        </button>
-        <button id="tab-manage-requests" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200" onclick="showTab('manage-requests')">
-            Gerenciar Solicitações de Ajuda
-        </button>
+        <button id="tab-manage-needs" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200 active" onclick="showTab('manage-needs')" th:text="#{painel.gerenciar_necessidades}"></button>
+        <button id="tab-manage-requests" class="tab-button py-3 px-6 text-lg font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-t-lg transition duration-200" onclick="showTab('manage-requests')" th:text="#{painel.gerenciar_solicitacoes}"></button>
     </div>
 
     <div id="content-manage-needs" class="tab-content">
         <div class="bg-white p-8 rounded-lg shadow-xl mb-10">
-            <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center">Cadastrar Nova Necessidade</h2>
+            <h2 class="text-3xl font-bold text-blue-700 mb-6 text-center" th:text="#{painel.cadastrar_nova_necessidade}"></h2>
             <form th:action="@{/necessidade}" method="post">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Título da Necessidade</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.titulo_necessidade}"></label>
                         <input type="text" name="titulo" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Ajuda Humanitária em X" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Tipo de Desastre</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.tabela.tipo_desastre}"></label>
                         <select name="desastre" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                            <option value="">Selecione o tipo de desastre</option>
-                            <option value="ENCHENTE">Enchente</option>
-                            <option value="SECA">Seca</option>
-                            <option value="DESLIZAMENTO">Deslizamento</option>
-                            <option value="TERREMOTO">Terremoto</option>
-                            <option value="INCENDIO">Incêndio</option>
-                            <option value="VENDAVAL">Vendaval</option>
+                            <option value="" th:text="#{painel.selecione_tipo_desastre}"></option>
+                            <option value="ENCHENTE" th:text="#{painel.desastre.enchente}"></option>
+                            <option value="SECA" th:text="#{painel.desastre.seca}"></option>
+                            <option value="DESLIZAMENTO" th:text="#{painel.desastre.deslizamento}"></option>
+                            <option value="TERREMOTO" th:text="#{painel.desastre.terremoto}"></option>
+                            <option value="INCENDIO" th:text="#{painel.desastre.incendio}"></option>
+                            <option value="VENDAVAL" th:text="#{painel.desastre.vendaval}"></option>
                         </select>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">CEP</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.cep}"></label>
                         <input type="text" name="endereco.cep" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00000-000" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Cidade</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.cidade}"></label>
                         <input type="text" name="endereco.cidade" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: São Paulo" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">UF</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.uf}"></label>
                         <input type="text" name="endereco.uf" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: SP, RJ" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Bairro</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.bairro}"></label>
                         <input type="text" name="endereco.bairro" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Jardim Paulista" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Número</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.numero}"></label>
                         <input type="text" name="endereco.numero" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 00" required>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Complemento (opcional)</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.complemento}"></label>
                         <input type="text" name="endereco.complemento" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: Complemento">
                     </div>
                 </div>
                 <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Descrição Detalhada da Necessidade</label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.descricao_detalhada}"></label>
                     <textarea name="descricao" rows="5" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Descreva a situação, o tipo de ajuda necessária, etc."></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Nível de Urgência</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.nivel_urgencia}"></label>
                         <select name="urgencia" class="shadow border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
-                            <option value="BAIXA">Baixa</option>
-                            <option value="MEDIA">Média</option>
-                            <option value="ALTA">Alta</option>
-                            <option value="ALTISSIMA">Altíssima</option>
+                            <option value="BAIXA" th:text="#{painel.urgencia.baixa}"></option>
+                            <option value="MEDIA" th:text="#{painel.urgencia.media}"></option>
+                            <option value="ALTA" th:text="#{painel.urgencia.alta}"></option>
+                            <option value="ALTISSIMA" th:text="#{painel.urgencia.altissima}"></option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Número Estimado de Pessoas Afetadas</label>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.numero_estimado_pessoas}"></label>
                         <input type="number" name="pessoasAfetadas" min="1" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ex: 50" required>
                     </div>
                 </div>
                 <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Habilidades Requeridas</label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" th:text="#{painel.habilidades_requeridas}"></label>
                     <div class="flex flex-wrap gap-3">
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="MEDICO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Médico(a)</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.medico}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="ENFERMEIRO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Enfermeiro(a)</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.enfermeiro}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="ENGENHEIRO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Engenheiro(a)</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.engenheiro}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="RESGATE" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Resgate</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.resgate}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="COZINHA" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Cozinha/Alimentos</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.cozinha}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="LOGISTICA" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Logística</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.logistica}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="PSICOLOGO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Psicólogo(a)</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.psicologo}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="EDUCACAO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Educação</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.educacao}"></span>
                         </label>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="habilidadesRequeridas" value="OUTRO" class="form-checkbox h-5 w-5 text-blue-600">
-                            <span class="ml-2 text-gray-700">Outro (especificar)</span>
+                            <span class="ml-2 text-gray-700" th:text="#{painel.habilidade.outro}"></span>
                         </label>
                     </div>
-                    <input type="text" name="habilidadeOutro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2" placeholder="Especifique outras habilidades">
+                    <input type="text" name="habilidadeOutro" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-2" th:placeholder="#{painel.habilidade.outro_especifique}" placeholder="Especifique outras habilidades">
                 </div>
                 <div class="flex items-center justify-center">
-                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300">Cadastrar Necessidade</button>
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300" th:text="#{painel.botao_cadastrar}"></button>
                 </div>
             </form>
         </div>
 
-        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Necessidades Cadastradas</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center" th:text="#{painel.necessidades_cadastradas}"></h2>
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
             <table class="min-w-full leading-normal">
                 <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Título
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Local
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Tipo Desastre
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Status
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Urgência
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Ações
-                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.titulo}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.local}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.tipo_desastre}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.status}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.urgencia}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.acoes}"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -199,8 +183,8 @@
                                 </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <a class="text-green-600 hover:text-blue-900 mr-3" th:href="@{/necessidade/finalizar/{id}(id=${necessidade.id})}">Finalizar</a>
-                        <a class="text-red-600 hover:text-red-900" th:href="@{/necessidade/excluir/{id}(id=${necessidade.id})}">Excluir</a>
+                        <a class="text-green-600 hover:text-blue-900 mr-3" th:href="@{/necessidade/finalizar/{id}(id=${necessidade.id})}" th:text="#{painel.acao.finalizar}"></a>
+                        <a class="text-red-600 hover:text-red-900" th:href="@{/necessidade/excluir/{id}(id=${necessidade.id})}" th:text="#{painel.acao.excluir}"></a>
                     </td>
                 </tr>
                 </tbody>
@@ -209,32 +193,18 @@
     </div>
 
     <div id="content-manage-requests" class="tab-content hidden">
-        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Solicitações de Ajuda Recebidas</h2>
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center" th:text="#{painel.solicitacoes_ajuda}"></h2>
         <div class="bg-white rounded-lg shadow-xl overflow-hidden">
             <table class="min-w-full leading-normal">
                 <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Desastre
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Solicitante
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Local
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Urgência
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Status
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Data Solicitação
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                        Ações
-                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.desastre}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.solicitante}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.local}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.urgencia}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.status}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.data_solicitacao}"></th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-200 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider" th:text="#{painel.tabela.acoes}"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -276,9 +246,9 @@
                         <p class="text-gray-900 whitespace-no-wrap" th:text="${@localeConfig.formatDate(solicitacao.dataAcontecimento, #locale)}"></p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <a class="text-green-600 hover:text-green-900 mr-3" th:href="@{/ajuda/aprovar/{id}(id=${solicitacao.id})}">Aprovar</a>
-                        <a class="text-red-600 hover:text-gray-900 mr-3" th:href="@{/ajuda/negar/{id}(id=${solicitacao.id})}">Negar</a>
-                        <a class="text-red-800 hover:text-gray-900" th:href="@{/ajuda/excluir/{id}(id=${solicitacao.id})}">Excluir</a>
+                        <a class="text-green-600 hover:text-green-900 mr-3" th:href="@{/ajuda/aprovar/{id}(id=${solicitacao.id})}" th:text="#{painel.acao.aprovar}"></a>
+                        <a class="text-red-600 hover:text-gray-900 mr-3" th:href="@{/ajuda/negar/{id}(id=${solicitacao.id})}" th:text="#{painel.acao.negar}"></a>
+                        <a class="text-red-800 hover:text-gray-900" th:href="@{/ajuda/excluir/{id}(id=${solicitacao.id})}" th:text="#{painel.acao.excluir}"></a>
                     </td>
                 </tr>
                 </tbody>
