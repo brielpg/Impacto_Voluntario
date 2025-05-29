@@ -75,12 +75,29 @@ public class VoluntarioService implements UserDetailsService {
         }
     }
 
+    @Transactional
+    public void cancelarInscricao(String email, Long necessidadeId) {
+        var voluntario = this.getByEmail(email);
+        var necessidade = necessidadeService.findById(necessidadeId);
+
+        if (voluntario.getNecessidades().contains(necessidade)) {
+            voluntario.getNecessidades().remove(necessidade);
+            necessidade.getVoluntarios().remove(voluntario);
+            necessidade.setQtdVoluntarios(necessidade.getVoluntarios().size());
+            this.save(voluntario);
+            necessidadeService.save(necessidade);
+        }
+    }
+
     @Transactional(readOnly = true)
     public Voluntario getByEmail(String email) {
-        var voluntario = repository.findByEmail(email)
+        UserDetails userDetails = repository.findByEmail(email)
                 .orElseThrow(() -> new ObjectNotFoundException("Voluntario with email \""+email+"\" not found"));
 
-        return (Voluntario) voluntario;
+        Voluntario voluntario = (Voluntario) userDetails;
+        voluntario.getNecessidades().size();
+
+        return voluntario;
     }
 
     @Transactional

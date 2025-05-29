@@ -40,6 +40,12 @@ public class VoluntarioController {
         return "redirect:/voluntario/dashboard";
     }
 
+    @GetMapping("/cancelar/{id}")
+    public String cancelarInscricao(Principal principal, @PathVariable Long id){
+        service.cancelarInscricao(principal.getName(), id);
+        return "redirect:/voluntario/dashboard";
+    }
+
     @GetMapping
     public String createPage(Model model){
         model.addAttribute("voluntario", new Voluntario());

@@ -41,52 +41,40 @@
     </div>
 
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Minhas Inscrições</h2>
-<!--    Um for loop em todas as inscricoes do usuario exibindo em divs-->
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500 hover:shadow-lg transition duration-300">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Ajuda Humanitária em [Cidade/Região]</h3>
-            <p class="text-gray-600 mb-3">Necessidade urgente de apoio para distribuição de alimentos e abrigo.</p>
-            <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Local:</span> [Endereço Aproximado]
-            </div>
-            <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Habilidades Requeridas:</span> Logística, Organização, Comunicação
-            </div>
-            <div class="text-gray-700 text-sm mb-4">
-                <span class="font-semibold">Urgência:</span> <span class="text-red-600 font-bold">ALTA</span>
-            </div>
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
-        </div>
+        <div th:each="necessidade : ${voluntario.necessidades}"
+             th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'border-green-500' :
+                            necessidade.urgencia.descricao == 'Média' ? 'border-blue-500' :
+                            necessidade.urgencia.descricao == 'Alta' ? 'border-yellow-500' :
+                            'border-red-500'}"
+             class="bg-white rounded-lg shadow-md p-6 border-l-4 hover:shadow-lg transition duration-300">
 
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500 hover:shadow-lg transition duration-300">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Apoio Médico em Campo</h3>
-            <p class="text-gray-600 mb-3">Profissionais de saúde para atendimento primário em área remota.</p>
-            <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Local:</span> [Endereço Aproximado]
-            </div>
-            <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Habilidades Requeridas:</span> Médico, Enfermeiro, Primeiros Socorros
-            </div>
-            <div class="text-gray-700 text-sm mb-4">
-                <span class="font-semibold">Urgência:</span> Moderada
-            </div>
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
-        </div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-2" th:text="${necessidade.titulo} + ' - ' + ${necessidade.endereco.cidade} +'/'+ ${necessidade.endereco.uf}"></h3>
+            <p class="text-gray-600 mb-3" th:text="${necessidade.descricao}">Descrição da necessidade</p>
 
-        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500 hover:shadow-lg transition duration-300">
-            <h3 class="text-2xl font-semibold text-gray-800 mb-2">Reconstrução de Infraestrutura</h3>
-            <p class="text-gray-600 mb-3">Auxílio na recuperação de estruturas danificadas por enchentes.</p>
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Local:</span> [Endereço Aproximado]
+                <span class="font-semibold">Tipo de Desastre:</span> <span th:text="${necessidade.desastre.descricao}"></span>
             </div>
+
             <div class="text-gray-700 text-sm mb-2">
-                <span class="font-semibold">Habilidades Requeridas:</span> Engenheiro, Construção, Mão de Obra
+                <span class="font-semibold">Local:</span> <span th:text="${necessidade.endereco.cidade} + ', ' + ${necessidade.endereco.uf}"></span>
             </div>
+
+            <div class="text-gray-700 text-sm mb-2">
+                <span class="font-semibold">Voluntários Cadastrados:</span> <span th:text="${necessidade.qtdVoluntarios}"></span>
+            </div>
+
             <div class="text-gray-700 text-sm mb-4">
-                <span class="font-semibold">Urgência:</span> Média
+                <span class="font-semibold">Urgência:</span>
+                <span class="font-bold" th:text="${necessidade.urgencia}"
+                      th:classappend="${necessidade.urgencia.descricao == 'Baixa' ? 'text-green-600' :
+                          necessidade.urgencia.descricao == 'Média' ? 'text-blue-600' :
+                          necessidade.urgencia.descricao == 'Alta' ? 'text-yellow-600' :
+                          'text-red-600'}"> </span>
             </div>
-            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Ver Detalhes</button>
+            <a class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition duration-300"
+               th:href="@{/voluntario/cancelar/{id}(id=${necessidade.id})}">Cancelar Inscrição</a>
         </div>
     </div>
 
