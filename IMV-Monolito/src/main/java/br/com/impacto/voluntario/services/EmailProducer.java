@@ -15,7 +15,8 @@ public class EmailProducer {
     @Value(value = "${broker.queue.email.name}")
     private String routingKey;
 
-    public void sendEmailMessage(EmailMessageDto emailMessageDto){
+    public void sendEmailMessage(String emailTo, String subject, String text){
+        EmailMessageDto emailMessageDto = new EmailMessageDto(emailTo, subject, text);
         rabbitTemplate.convertAndSend("", routingKey, emailMessageDto);
     }
 }

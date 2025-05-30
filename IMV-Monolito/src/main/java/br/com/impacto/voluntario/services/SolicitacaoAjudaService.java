@@ -23,6 +23,9 @@ public class SolicitacaoAjudaService {
     private SolicitacaoAjudaRepository repository;
 
     @Autowired
+    private EmailProducer emailProducer;
+
+    @Autowired
     private EnderecoRepository enderecoRepository;
 
     @Transactional
@@ -38,6 +41,15 @@ public class SolicitacaoAjudaService {
         solicitacao.setStatus(StatusEnum.ANALISE);
 
         repository.save(solicitacao);
+
+        String emailTo = solicitacao.getEmailSolicitante();
+        String subject = "Solicitação de ajuda recebida!";
+        String text = "Olá, " + solicitacao.getNomeSolicitante() + ",\n" +
+                "Recebemos sua solicitação referente ao ocorrido em " + solicitacao.getEndereco().getCidade() + ". \uD83D\uDEA8 \n" +
+                "Nossa equipe de moderação analisará seu pedido e entrará em contato caso sejam necessárias mais informações.\n" +
+                "Obrigado por confiar em nossa rede de voluntários.\n" +
+                "\uD83D\uDCCC Atenciosamente, Impacto Voluntário";
+        emailProducer.sendEmailMessage(emailTo, subject, text);
 
         return solicitacao;
     }

@@ -25,6 +25,9 @@ public class NecessidadeService {
     private VoluntarioService voluntarioService;
 
     @Autowired
+    private EmailProducer emailProducer;
+
+    @Autowired
     private EnderecoRepository enderecoRepository;
 
     @Transactional
@@ -69,6 +72,15 @@ public class NecessidadeService {
             v.setMissoesConcluidas(v.getMissoesConcluidas() + 1);
             v.setVidasImpactadas(v.getVidasImpactadas() + necessidade.getPessoasAfetadas());
             voluntarioService.save(v);
+
+            String emailTo = v.getEmail();
+            String subject = "Campanha " + necessidade.getTitulo() + " finalizada com sucesso!";
+            String text = "Olá, " + v.getNome() + ",\n" +
+                    "A campanha " + necessidade.getTitulo() + " foi concluída com sucesso! \uD83C\uDF89 \n" +
+                    "Graças a você e outros voluntários, " + necessidade.getPessoasAfetadas() + " pessoas foram ajudadas. Sua generosidade e esforço fizeram toda a diferença!\n" +
+                    "\uD83D\uDCAA Esperamos contar com sua participação em futuras missões!\n" +
+                    "\uD83D\uDCCC Atenciosamente, Impacto Voluntário";
+            emailProducer.sendEmailMessage(emailTo, subject, text);
         });
         this.save(necessidade);
     }

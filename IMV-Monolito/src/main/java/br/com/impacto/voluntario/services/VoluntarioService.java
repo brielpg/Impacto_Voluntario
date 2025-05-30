@@ -1,6 +1,7 @@
 package br.com.impacto.voluntario.services;
 
 import br.com.impacto.voluntario.dtos.CreateVoluntarioDto;
+import br.com.impacto.voluntario.dtos.EmailMessageDto;
 import br.com.impacto.voluntario.enums.HabilidadesEnum;
 import br.com.impacto.voluntario.enums.Roles;
 import br.com.impacto.voluntario.exceptions.ConflictException;
@@ -36,6 +37,9 @@ public class VoluntarioService implements UserDetailsService {
     private NecessidadeService necessidadeService;
 
     @Autowired
+    private EmailProducer emailProducer;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -58,6 +62,16 @@ public class VoluntarioService implements UserDetailsService {
 
         this.save(voluntario);
 
+        String emailTo = voluntario.getEmail();
+        String subject = "Bem-vindo à nossa rede de voluntários!";
+        String text = "Olá, " + voluntario.getNome() + ",\n" +
+                "Seja bem-vindo à nossa plataforma! \uD83C\uDF89 \n" +
+                "Sua vontade de ajudar pode transformar vidas. Agora você faz parte de uma comunidade dedicada a auxiliar pessoas em momentos de necessidade.\n" +
+                "\uD83D\uDD0E Acesse seu dashboard e descubra campanhas que precisam de sua ajuda.\n" +
+                "Juntos, fazemos a diferença! \uD83D\uDC99 \n" +
+                "\uD83D\uDCCC Atenciosamente, Impacto Voluntário";
+        emailProducer.sendEmailMessage(emailTo, subject, text);
+
         return voluntario;
     }
 
@@ -72,6 +86,15 @@ public class VoluntarioService implements UserDetailsService {
             necessidade.setQtdVoluntarios(necessidade.getVoluntarios().size());
             this.save(voluntario);
             necessidadeService.save(necessidade);
+
+            String emailTo = voluntario.getEmail();
+            String subject = "Sua inscrição na campanha foi confirmada!";
+            String text = "Olá, " + voluntario.getNome() + ",\n" +
+                    "Muito obrigado por se voluntariar para a campanha " + necessidade.getTitulo() + "! \n" +
+                    "Sua disposição fará a diferença para " + necessidade.getPessoasAfetadas() + " pessoas afetadas pelo " + necessidade.getDesastre().getDescricao() + ".\n" +
+                    "Juntos, fazemos a diferença! \uD83D\uDC99 \n" +
+                    "\uD83D\uDCCC Atenciosamente, Impacto Voluntário";
+            emailProducer.sendEmailMessage(emailTo, subject, text);
         }
     }
 
@@ -86,6 +109,15 @@ public class VoluntarioService implements UserDetailsService {
             necessidade.setQtdVoluntarios(necessidade.getVoluntarios().size());
             this.save(voluntario);
             necessidadeService.save(necessidade);
+
+            String emailTo = voluntario.getEmail();
+            String subject = "Cancelamento da sua inscrição na campanha";
+            String text = "Olá, " + voluntario.getNome() + ",\n" +
+                    "Lamentamos saber que você cancelou sua participação na campanha " + necessidade.getTitulo() + ". \uD83D\uDE22 \n" +
+                    "Esperamos vê-lo em outras oportunidades, pois sua ajuda é extremamente valiosa!\n" +
+                    "Caso precise de algo, estamos à disposição. \uD83D\uDC99 \n" +
+                    "\uD83D\uDCCC Atenciosamente, Impacto Voluntário";
+            emailProducer.sendEmailMessage(emailTo, subject, text);
         }
     }
 
