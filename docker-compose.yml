@@ -1,0 +1,46 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - backend
+
+  monolito:
+    build: ./IMV-Monolito
+    container_name: monolito
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.rabbitmq.host=rabbitmq
+    networks:
+      - backend
+
+  microservice:
+    build: ./IMV-Microservice
+    container_name: microservice
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8082:8082"
+    environment:
+      - spring.rabbitmq.host=rabbitmq
+    networks:
+      - backend
+
+volumes:
+  rabbitmq_data:
+    driver: local
+
+networks:
+  backend:
+    driver: bridge
