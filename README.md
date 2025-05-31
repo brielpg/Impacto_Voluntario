@@ -42,9 +42,9 @@ As API estão divididas em dois diretórios: 📂**IMV-Monolito/** e 📂**IMV-M
 
 ---
 ## 2. Vídeos apresentando o projeto
-Link da Aplicação:
+Link da Aplicação: https://www.youtube.com/
 
-Link do Pitch:
+Link do Pitch: https://www.youtube.com/
 
 ---
 ## 3. Endpoints Disponíveis
