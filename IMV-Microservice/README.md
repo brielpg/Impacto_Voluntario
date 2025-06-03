@@ -60,7 +60,22 @@ ação feita relacionada a ele na nossa aplicação.
 
 ---
 ## 3. Testes
-> Para testar a aplicação você pode realizar alguma ação no monolito, assim passando a informação de um para o outro, ou
+> Para testar a aplicação manualmente você pode realizar alguma ação no monolito, assim passando a informação de um para o outro, ou
 > acessando o console do RabbitMq na porta `15672` e enviando uma requisição.
+
+### 3.1 Teste Unitário
+> Para realizar os testes da aplicação é importante que você siga os passos abaixo:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/brielpg/Impacto_Voluntario.git
+
+2. Abra o diretório do projeto clonado:
+    ```bash
+   cd Impacto_Voluntario/IMV-Microservice
+
+3. Execute o comando para rodar os testes:
+    ```bash
+   mvn test
 
 ---
