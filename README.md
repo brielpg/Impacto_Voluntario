@@ -8,9 +8,15 @@
 
 
 ### Descrição Geral sobre o Projeto
-Nosso projeto consiste em duas API desenvolvidas em Java utilizando o framework Spring Boot.  
-As API estão divididas em dois diretórios: 📂**IMV-Monolito/** e 📂**IMV-Microservice/**, em cada um deles você encontrará um README detalhando endpoints, testes e outras informações sobre a respectiva api.
+> O projeto consiste em duas API desenvolvidas em Java utilizando o framework Spring Boot.  
+As API estão divididas em dois diretórios: 📂**IMV-Monolito/** e 📂**IMV-Microservice/**, em cada um deles você encontrará um **README** detalhando endpoints, testes e outras informações relevantes sobre a respectiva api.
 
+
+Nosso projeto propõe uma solução inovadora para conectar voluntários a comunidades afetadas por desastres naturais.
+Criamos uma plataforma digital que centraliza a gestão de voluntários, permitindo que pessoas interessadas em ajudar possam se cadastrar e se inscrever em campanhas e projetos voltados para a reconstrução e suporte a áreas devastadas.
+
+Além disso, nossa plataforma conta com uma página dedicada a primeiros socorros, onde usuários podem acessar informações essenciais sobre medidas de segurança e atendimento emergencial.
+Para fortalecer a mobilização e a resposta rápida, também disponibilizamos um canal de denúncia, permitindo que cidadãos relatem áreas afetadas por desastres naturais e facilitem a coordenação de esforços de ajuda.
 
 ### Sumário
 - [Integrantes](#integrantes)
@@ -42,9 +48,9 @@ As API estão divididas em dois diretórios: 📂**IMV-Monolito/** e 📂**IMV-M
 
 ---
 ## 2. Vídeos apresentando o projeto
-Link da Aplicação: https://www.youtube.com/
+`Aplicação`: https://www.youtube.com/watch?v=BUngqOXYSI4
 
-Link do Pitch: https://www.youtube.com/
+`Pitch`: https://www.youtube.com/watch?v=5ZphSnd5dYQ
 
 ---
 ## 3. Endpoints Disponíveis
